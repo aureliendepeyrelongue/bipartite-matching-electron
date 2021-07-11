@@ -1,0 +1,33 @@
+{
+  "tables": {
+    "tableA": {
+      "location": "",
+      "data": [],
+      "columnNames": [
+        {
+          "origin": "",
+          "target": ""
+        }
+      ],
+      "constants": [{ "key": "", "value": "" }]
+    },
+    "tableB": {
+      "location": "",
+      "data": []
+    }
+  },
+  "constraints": [
+    {
+      "name": "",
+      "type": "",
+      "content": "",
+      "tokens": [],
+      "description": ""
+    }
+  ],
+  "matchingResult": {
+    "pairs": [],
+    "rejectedA": [],
+    "rejectedB": []
+  }
+}
