@@ -1,5 +1,7 @@
 <template>
-  <div ref="editor" id="editor"></div>
+  <div>
+    <div ref="editor" id="editor"></div>
+  </div>
 </template>
 
 <script>
@@ -9,11 +11,17 @@ import * as monaco from "monaco-editor";
 export default {
   data() {
     return {
+      editor: null,
+      completionProvider: null,
       monaco,
     };
   },
   components: {},
-  props: {},
+  props: {
+    content: {
+      type: String,
+    },
+  },
   mounted() {
     this.$nextTick(function() {
       monaco.languages.register({ id: "mentoringLanguage" });
@@ -42,24 +50,32 @@ export default {
           { token: "var-token", fontStyle: "italic" },
           { token: "string-token", foreground: "F1556C", fontStyle: "italic" },
           { token: "number-token", foreground: "F1556C" },
-          { token: "and-token", foreground: "1ABC9C", fontStyle: "bold" },
-          { token: "not-token", foreground: "1ABC9C", fontStyle: "bold" },
+          { token: "and-token", foreground: "F1556C", fontStyle: "bold" },
+          { token: "not-token", foreground: "F1556C", fontStyle: "bold" },
         ],
       });
-      monaco.editor.create(this.$refs.editor, {
+      this.editor = monaco.editor.create(this.$refs.editor, {
         theme: "mentoringTheme",
-        value: `mentee.age < mentor.age and mentee.name = mentor.name and .city = "Paris" and mentee.age not "angel"`,
+        value: this.content,
         language: "mentoringLanguage",
       });
-      monaco.languages.registerCompletionItemProvider("mentoringLanguage", {
-        provideCompletionItems: () => {
-          let suggestions = this.getSuggestions(monaco);
-          return { suggestions: suggestions };
-        },
-      });
+
+      this.completionProvider = monaco.languages.registerCompletionItemProvider(
+        "mentoringLanguage",
+        {
+          provideCompletionItems: () => {
+            let suggestions = this.getSuggestions(monaco);
+            return { suggestions: suggestions };
+          },
+        }
+      );
     });
   },
 
+  beforeDestroy() {
+    this.editor.dispose();
+    this.completionProvider.dispose();
+  },
   computed: {
     ...mapState({
       base: (state) => state.project.base,
@@ -67,9 +83,19 @@ export default {
   },
 
   methods: {
+    getEditorValue() {
+      return this.editor.getValue();
+    },
+
     getSuggestions(monaco) {
-      const aColumns = this.base.tables.tableA.columnNames;
-      const bColumns = this.base.tables.tableB.columnNames;
+      const aColumns =
+        this.base && this.base.tables && this.base.tables.tableA
+          ? this.base.tables.tableA.columns
+          : [];
+      const bColumns =
+        this.base && this.base.tables && this.base.tables.tableB
+          ? this.base.tables.tableB.columns
+          : [];
       let suggestions = [];
       aColumns.forEach((col, index) => {
         suggestions.push({

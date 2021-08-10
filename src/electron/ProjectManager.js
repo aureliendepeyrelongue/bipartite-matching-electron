@@ -4,32 +4,24 @@ import { normalize } from "normalize-diacritics";
 import removeAccents from "remove-accents";
 
 class ProjectManager {
-  constructor() {
+  constructor(projectName) {
+    this.createProject(projectName);
+  }
+
+  createProject(projectName) {
     this.base = {
+      name: projectName,
       tables: {
         tableA: {
           empty: true,
+          columns: [],
         },
         tableB: {
           empty: true,
+          columns: [],
         },
       },
-      constraints: [
-        {
-          name: "age",
-          type: "necessary",
-          value: "mentee.age < mentor.age",
-          tokens: [],
-          description: "",
-        },
-        {
-          name: "JobLevel",
-          type: "secondary",
-          value: "mentee.joeb_level = mentor.job_level",
-          tokens: [],
-          description: "",
-        },
-      ],
+      constraints: [],
       matchingResult: {
         pairs: [],
         rejectedA: [],
@@ -45,11 +37,12 @@ class ProjectManager {
       this.base.tables[`table${tableType}`].data = data;
       if (data.length) {
         const firstLine = data[0];
-        this.base.tables[`table${tableType}`].columnNames = [];
+        this.base.tables[`table${tableType}`].columns = [];
         for (let name in firstLine) {
-          this.base.tables[`table${tableType}`].columnNames.push({
+          this.base.tables[`table${tableType}`].columns.push({
             origin: name,
             target: constantCase(removeAccents(name)),
+            type: "string",
           });
         }
       }
@@ -62,39 +55,15 @@ class ProjectManager {
     return tableType === "A" || tableType === "B";
   }
 
-  addColumnTarget(tableType, origin, target) {
-    if (this.isValidTableType(tableType)) {
-      this.base.tables[`table${tableType}`].columnNames.push({
-        id: uuidv4(),
-        origin,
-        target,
-      });
-    } else {
-      throw new Error("Unknown table type", type);
-    }
-  }
-
-  updateColumnTarget(tableType, id, origin, target) {
-    if (this.isValidTableType(tableType)) {
-      const column = this.base.tables[`table${tableType}`].columnNames.find(
-        (el) => el.id === id
-      );
-      if (column) {
-        column.target = target;
-        column.origin = origin;
-      } else {
-        throw new Error("Column not found", origin);
-      }
-    } else {
-      throw new Error("Unknown table type", type);
-    }
+  updateColumns(tableType, columns) {
+    this.base.tables[`table${tableType}`].columns = columns;
   }
 
   deleteColumnTarget(tableType, id, origin) {
     if (this.isValidTableType(tableType)) {
-      this.base.tables[`table${tableType}`].columnNames = this.base.tables[
+      this.base.tables[`table${tableType}`].columns = this.base.tables[
         `table${tableType}`
-      ].columnNames.filter((el) => el.origin !== el.origin);
+      ].columns.filter((el) => el.origin !== el.origin);
     } else {
       throw new Error("Unknown table type", type);
     }
@@ -141,24 +110,24 @@ class ProjectManager {
     }
   }
 
-  addConstraint(name, type, content, tokens, description) {
+  addConstraint(name, type, weight, content, description) {
     this.base.constraints.push({
       id: uuidv4(),
       name,
       type,
+      weight,
       content,
-      tokens,
       description,
     });
   }
 
-  updateConstraint(id, name, type, content, tokens, description) {
+  updateConstraint(id, name, type, weight, content, description) {
     const constraint = this.base.constraints.find((el) => el.id === id);
     if (constraint) {
       constraint.name = name;
       constraint.type = type;
+      constraint.weight = weight;
       constraint.content = content;
-      constraint.tokens = tokens;
       constraint.description = description;
     } else {
       throw new Error("Constraint not found.", name);

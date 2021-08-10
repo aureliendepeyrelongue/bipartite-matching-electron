@@ -10,7 +10,6 @@ const mentee = {
     "aa:branch": "branch_F",
     "aa:region": "region_A",
     "aa:city": "city_F",
-
     "aa:can_speak": "english",
     "aa:other_participant_gender": "male",
     "aa:mentoring_type": "both",
@@ -18,6 +17,7 @@ const mentee = {
     "aa:lastName": "Francis",
     "aa:gender": "Male",
     "aa:email": "adkinsfrancis@quarex.com",
+    "aa:empty": "",
   },
   mentor = {
     "bb:age": 34,
@@ -42,6 +42,10 @@ const constraints = [
     value: `mentee.direction not "direction_Fd" and 
     ( mentee.age = 31 or mentor.age = 35 and
       (mentor.name = "angeli" or mentee.can_speak="englishi"))`,
+  },
+  {
+    type: "necessary",
+    value: `mentee.empty not "test"`,
   },
 ];
 

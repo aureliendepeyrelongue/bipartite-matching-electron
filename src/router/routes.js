@@ -81,14 +81,7 @@ export default [
     },
     component: () => import("../views/pages/apps/tickets"),
   },
-  {
-    path: "/apps/file-manager",
-    name: "file-manager",
-    meta: {
-      authRequired: true,
-    },
-    component: () => import("../views/pages/apps/file-manager"),
-  },
+
   {
     path: "/ecommerce/customers",
     name: "customers",

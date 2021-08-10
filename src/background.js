@@ -1,19 +1,57 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron";
+import { app, Menu, protocol, BrowserWindow, ipcMain, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
 import ProjectManager from "./electron/ProjectManager";
 import parseCSV from "./electron/parseCSV";
 
-const pm = new ProjectManager();
+const pm = new ProjectManager("Default project");
 // Scheme must be registered before the app is ready
 
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } },
 ]);
 
+const createMenu = (win) => {
+  const template = [
+    {
+      label: "Fichiers",
+      submenu: [
+        {
+          label: "Nouveau projet",
+          click() {
+            win.webContents.send("create-new-project", pm.base);
+          },
+        },
+        {
+          label: "Importer un projet",
+          click() {
+            dialog.showOpenDialog({
+              properties: ["openFile"],
+              filters: [{ name: "Project", extensions: ["bmatch"] }],
+            });
+          },
+        },
+
+        {
+          label: "Enregistrer",
+        },
+        {
+          label: "Enregistrer sous",
+        },
+      ],
+    },
+    {
+      label: "Fenêtre",
+      submenu: [{ label: "Quitter" }],
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+};
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
@@ -28,6 +66,7 @@ async function createWindow() {
   });
 
   eventManager(win);
+  createMenu(win);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -82,6 +121,9 @@ const eventManager = (win) => {
   ipcMain.on("app-loaded", (event) => {
     sendProjectToView(win);
   });
+  ipcMain.on("project-created", (event, projectName) => {
+    sendProjectToView(win);
+  });
   ipcMain.on("load-table-a", (event) => {
     dialog
       .showOpenDialog({
@@ -122,7 +164,6 @@ const eventManager = (win) => {
       })
       .then(({ tableBPath, data }) => {
         pm.setTable("B", tableBPath, data);
-        event.reply("table-b-loaded", pm.base.tables.tableB);
         sendProjectToView(win);
       })
       .catch((err) => {
@@ -132,9 +173,32 @@ const eventManager = (win) => {
 
   ipcMain.on("add-constant", (event, { tableType, key, value }) => {
     const constant = pm.addTableConstant(tableType, key, value);
-    event.reply("constant-added", constant);
     sendProjectToView(win);
   });
+
+  ipcMain.on(
+    "add-constraint",
+    (event, { name, type, weight, content, description }) => {
+      pm.addConstraint(name, type, weight, content, description);
+      //event.reply("constant-added", constant);
+      sendProjectToView(win);
+    }
+  );
+  ipcMain.on("update-columns", (event, { type, columns }) => {
+    console.log(type);
+    console.log(columns);
+    pm.updateColumns(type, columns);
+    sendProjectToView(win);
+  });
+
+  ipcMain.on(
+    "edit-constraint",
+    (event, { id, name, type, weight, content, description }) => {
+      pm.updateConstraint(id, name, type, weight, content, description);
+      //event.reply("constant-added", constant);
+      sendProjectToView(win);
+    }
+  );
 };
 
 // Exit cleanly on request from parent process in development mode.

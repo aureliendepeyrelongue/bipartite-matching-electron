@@ -80,15 +80,18 @@
                             >
                               <td>{{ c.name }}</td>
                               <td>
-                                {{ c.value }}
+                                {{ c.content }}
                               </td>
 
                               <td>
-                                {{ c.description }}
+                                {{ c.description ? c.description : "--" }}
                               </td>
                               <td>
                                 <ul class="list-inline table-action m-0">
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="handleEditMode(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -99,22 +102,20 @@
                                     </a>
                                   </li>
                                   <li class="list-inline-item">
-                                    <b-dropdown
-                                      right
-                                      toggle-class="action-icon px-1"
-                                      variant="black"
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="action-icon px-1"
                                     >
-                                      <template v-slot:button-content>
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                      </template>
-                                      <b-dropdown-item>Action</b-dropdown-item>
-                                      <b-dropdown-item
-                                        >Another action</b-dropdown-item
-                                      >
-                                      <b-dropdown-item
-                                        >Something else here</b-dropdown-item
-                                      >
-                                    </b-dropdown>
+                                      <i class="mdi mdi-eye-outline"></i>
+                                    </a>
+                                  </li>
+                                  <li class="list-inline-item">
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="action-icon px-1"
+                                    >
+                                      <i class="mdi mdi-delete"></i>
+                                    </a>
                                   </li>
                                 </ul>
                               </td>
@@ -160,17 +161,20 @@
                             >
                               <td>{{ c.name }}</td>
                               <td>
-                                {{ c.value }}
+                                {{ c.content }}
                               </td>
                               <td>
-                                {{ c.description }}
+                                {{ c.description ? c.description : "--" }}
                               </td>
                               <td>
                                 {{ c.weight }}
                               </td>
                               <td>
                                 <ul class="list-inline table-action m-0">
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="handleEditMode(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -181,22 +185,20 @@
                                     </a>
                                   </li>
                                   <li class="list-inline-item">
-                                    <b-dropdown
-                                      right
-                                      toggle-class="action-icon px-1"
-                                      variant="black"
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="action-icon px-1"
                                     >
-                                      <template v-slot:button-content>
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                      </template>
-                                      <b-dropdown-item>Action</b-dropdown-item>
-                                      <b-dropdown-item
-                                        >Another action</b-dropdown-item
-                                      >
-                                      <b-dropdown-item
-                                        >Something else here</b-dropdown-item
-                                      >
-                                    </b-dropdown>
+                                      <i class="mdi mdi-eye-outline"></i>
+                                    </a>
+                                  </li>
+                                  <li class="list-inline-item">
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="action-icon px-1"
+                                    >
+                                      <i class="mdi mdi-delete"></i>
+                                    </a>
                                   </li>
                                 </ul>
                               </td>
@@ -209,10 +211,18 @@
                 </div>
               </div>
 
-              <div class="card-body" v-if="subpage === 'add'">
+              <div
+                class="card-body"
+                v-if="subpage === 'add' || subpage === 'edit'"
+              >
                 <div>
-                  <h2>Editor</h2>
-                  <MonacoEditor />
+                  <ConstraintForm
+                    @on-save="handleConstraintFormSave"
+                    @on-cancel="handleConstraintFormCancel"
+                    @on-edit="handleConstraintFormEdit"
+                    :editMode="subpage === 'edit'"
+                    :form="selectedConstraint"
+                  />
                 </div>
               </div>
             </div>
@@ -228,13 +238,15 @@ import Layout from "../../layouts/main";
 import PageHeader from "@/components/Page-header";
 import appConfig from "../../../../app.config";
 import { mapState } from "vuex";
-import MonacoEditor from "@/components/MonacoEditor";
+import { ipcRenderer } from "electron";
+
+import ConstraintForm from "@/components/ConstraintForm";
 
 export default {
   components: {
     Layout,
     PageHeader,
-    MonacoEditor,
+    ConstraintForm,
   },
   page: {
     title: "Task-list",
@@ -243,20 +255,39 @@ export default {
 
   computed: {
     ...mapState({
-      constraints: (state) => state.project.base.constraints,
+      constraints: (state) =>
+        JSON.parse(JSON.stringify(state.project.base.constraints)),
     }),
 
+    constraintsFormatted() {
+      return this.constraints.map((c) => {
+        return {
+          ...c,
+          content:
+            c.content && c.content.length > this.maxStringSize
+              ? c.content.substring(0, this.maxStringSize) + "..."
+              : c.content,
+          description:
+            c.description && c.description.length > this.maxStringSize
+              ? c.description.substring(0, this.maxStringSize) + "..."
+              : c.description,
+        };
+      });
+    },
+
     necessaryConstraints() {
-      return this.constraints.filter((c) => c.type === "necessary");
+      return this.constraintsFormatted.filter((c) => c.type === "necessary");
     },
 
     secondaryConstraints() {
-      return this.constraints.filter((c) => c.type === "secondary");
+      return this.constraintsFormatted.filter((c) => c.type === "secondary");
     },
   },
   data() {
     return {
+      maxStringSize: 40,
       title: "Contraintes",
+      selectedConstraint: {},
       subpage: "home",
       items: [
         {
@@ -277,6 +308,21 @@ export default {
   mounted() {},
 
   methods: {
+    handleEditMode(c) {
+      this.selectedConstraint = this.constraints.find((c2) => c2.id === c.id);
+      this.subpage = "edit";
+    },
+    handleConstraintFormSave(form) {
+      this.subpage = "home";
+      ipcRenderer.send("add-constraint", form);
+    },
+    handleConstraintFormCancel() {
+      this.subpage = "home";
+    },
+    handleConstraintFormEdit(form) {
+      this.subpage = "home";
+      ipcRenderer.send("edit-constraint", form);
+    },
     addConstraint() {
       this.subpage = "add";
     },

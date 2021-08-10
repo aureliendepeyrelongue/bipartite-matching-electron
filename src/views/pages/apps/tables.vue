@@ -10,7 +10,8 @@
               @click="uploadTableA()"
             >
               <span>
-                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau A
+                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau
+                mentees
               </span>
             </div>
             <div
@@ -18,7 +19,8 @@
               @click="uploadTableB()"
             >
               <span>
-                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau B
+                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau
+                mentors
               </span>
             </div>
             <!-- Table -->
@@ -89,29 +91,100 @@
               </table>
             </div>
             <!-- End table -->
+            <div
+              v-if="
+                tables.tableA && tables.tableA.data && tables.tableA.data.length
+              "
+            >
+              <h5>Tableau mentee</h5>
+
+              <div class="table-responsive mb-0">
+                <b-table
+                  :responsive="true"
+                  :per-page="perPage"
+                  :current-page="currentPageA"
+                  v-if="tables.tableA"
+                  :items="formatTableA"
+                  :fields="tables.tableA.columns.map((c) => c.origin)"
+                ></b-table>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers float-right"
+                  >
+                    <ul class="pagination pagination-rounded mb-0">
+                      <!-- pagination -->
+                      <b-pagination
+                        v-model="currentPageA"
+                        :total-rows="rowsA"
+                        :per-page="perPage"
+                      ></b-pagination>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="
+                tables.tableB && tables.tableB.data && tables.tableB.data.length
+              "
+            >
+              <h5>Tableau mentors</h5>
+
+              <div class="table-responsive mb-0">
+                <b-table
+                  :responsive="true"
+                  :per-page="perPage"
+                  :current-page="currentPageB"
+                  v-if="tables.tableB"
+                  :items="formatTableB"
+                  :fields="tables.tableB.columns.map((c) => c.origin)"
+                ></b-table>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers float-right"
+                  >
+                    <ul class="pagination pagination-rounded mb-0">
+                      <!-- pagination -->
+                      <b-pagination
+                        v-model="currentPageB"
+                        :total-rows="rowsB"
+                        :per-page="perPage"
+                      ></b-pagination>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <b-modal
             id="edit-tables-modal"
             scrollable
             title="Modal title"
             title-tag="h5"
+            size="lg"
+            @ok="updateColumns"
           >
             <div>
               <h5>Colonnes</h5>
               <table
                 v-if="
                   selectedTable &&
-                    selectedTable.columnNames &&
-                    selectedTable.columnNames.length
+                    selectedTable.columns &&
+                    selectedTable.columns.length
                 "
                 class="table"
               >
                 <tr>
                   <th>Colonne</th>
                   <th>Variable associée</th>
+                  <th>Type</th>
                 </tr>
                 <tr
-                  v-for="(column, index) in selectedTable.columnNames"
+                  v-for="(column, index) in selectedTable.columns"
                   :key="index"
                 >
                   <td>
@@ -121,8 +194,16 @@
                   <td>
                     {{ column.target }}
                   </td>
+                  <td>
+                    <b-form-select
+                      v-model="column.type"
+                      :options="columnsTypeOptions"
+                    ></b-form-select>
+                  </td>
                 </tr>
               </table>
+
+              <!--
 
               <h5>Constantes</h5>
 
@@ -144,6 +225,7 @@
                   <td>
                     {{ constant.value }}
                   </td>
+                 
                 </tr>
               </table>
 
@@ -167,6 +249,7 @@
                   </button>
                 </div>
               </div>
+              -->
             </div>
           </b-modal>
         </div>
@@ -196,25 +279,64 @@ export default {
     meta: [{ name: "description", content: appConfig.description }],
   },
   computed: {
+    rowsA() {
+      return this.tables && this.tables.tableA
+        ? this.tables.tableA.data.length
+        : 0;
+    },
+    rowsB() {
+      return this.tables && this.tables.tableB
+        ? this.tables.tableB.data.length
+        : 0;
+    },
+    formatTableA() {
+      const newTable = this.tables.tableA.data;
+      newTable.forEach((el) => {
+        for (let name in el) {
+          let val = el[name];
+          el[name] = this.formatField(val);
+        }
+      });
+      return newTable;
+    },
+    formatTableB() {
+      const newTable = this.tables.tableB.data;
+      newTable.forEach((el) => {
+        for (let name in el) {
+          let val = el[name];
+          el[name] = this.formatField(val);
+        }
+      });
+      return newTable;
+    },
     ...mapState({
-      base: (state) => state.project.base,
+      tables: (state) => JSON.parse(JSON.stringify(state.project.base.tables)),
     }),
 
     fileManagerData() {
       let tables = [];
-      if (!this.base.tables.tableA.empty) {
-        tables.push(this.getFileData("A", this.base.tables.tableA));
+      if (!this.tables.tableA.empty) {
+        tables.push(this.getFileData("A", this.tables.tableA));
       }
-      if (!this.base.tables.tableB.empty) {
-        tables.push(this.getFileData("B", this.base.tables.tableB));
+      if (!this.tables.tableB.empty) {
+        tables.push(this.getFileData("B", this.tables.tableB));
       }
       return tables;
     },
   },
   data() {
     return {
+      selectedType: "",
+      columnsTypeOptions: [
+        { value: "string", text: "Texte" },
+        { value: "number", text: "Nombre" },
+      ],
       selectedTable: null,
       title: "Tableaux",
+      currentPageA: 1,
+      currentPageB: 1,
+
+      perPage: 20,
       items: [
         {
           text: "Apps",
@@ -236,6 +358,9 @@ export default {
     });
   },
   methods: {
+    formatField(str) {
+      return str.length > 40 ? str.substring(0, 40) + "..." : str;
+    },
     getFileData(tableType, table) {
       return {
         type: tableType,
@@ -255,9 +380,11 @@ export default {
     },
     showTableModal(type) {
       if (type === "A") {
-        this.selectedTable = this.base.tables.tableA;
+        this.selectedTable = this.tables.tableA;
+        this.selectedType = "A";
       } else if (type === "B") {
-        this.selectedTable = this.base.tables.tableB;
+        this.selectedTable = this.tables.tableB;
+        this.selectedType = "B";
       }
       this.selectedTable.type = type;
       this.$bvModal.show("edit-tables-modal");
@@ -267,6 +394,13 @@ export default {
     },
     uploadTableB() {
       ipcRenderer.send("load-table-b", "");
+    },
+
+    updateColumns() {
+      ipcRenderer.send("update-columns", {
+        type: this.selectedType,
+        columns: this.selectedTable.columns,
+      });
     },
   },
   middleware: "router-auth",

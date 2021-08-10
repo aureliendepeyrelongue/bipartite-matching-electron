@@ -1,4 +1,5 @@
 export const menuItems = [
+  /*
   {
     id: 1,
     label: "menuitems.navigation.text",
@@ -30,7 +31,7 @@ export const menuItems = [
         link: "/dashboard/analytics",
       },
     ],
-  },
+  },*/
   {
     id: 61234,
     label: "menuitems.apps.text",
@@ -54,7 +55,7 @@ export const menuItems = [
     icon: "ri-restart-line",
     link: "/apps/matching",
   },
-  {
+  /* {
     id: 6,
     label: "menuitems.apps.text",
     isTitle: true,
@@ -209,12 +210,7 @@ export const menuItems = [
       },
     ],
   },
-  {
-    id: 33,
-    label: "menuitems.filemanager.text",
-    icon: "ri-folders-line",
-    link: "/apps/file-manager",
-  },
+
   {
     id: 34,
     label: "menuitems.custom.text",
@@ -691,5 +687,5 @@ export const menuItems = [
         ],
       },
     ],
-  },
+  },*/
 ];
