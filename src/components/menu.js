@@ -35,6 +35,7 @@ export const menuItems = [
   {
     id: 61234,
     label: "menuitems.apps.text",
+    projectName: true,
     isTitle: true,
   },
   {

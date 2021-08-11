@@ -39,13 +39,13 @@ function evalConstraint(constraint, mentee, mentor) {
 const constraints = [
   {
     type: "necessary",
-    value: `mentee.direction not "direction_Fd" and 
+    content: `mentee.direction not "direction_Fd" and 
     ( mentee.age = 31 or mentor.age = 35 and
       (mentor.name = "angeli" or mentee.can_speak="englishi"))`,
   },
   {
     type: "necessary",
-    value: `mentee.empty not "test"`,
+    content: `mentee.empty not "test"`,
   },
 ];
 

@@ -18,7 +18,7 @@ function prepareTokens(tokens) {
 module.exports = function(nameSpaceA, nameSpaceB, constraint) {
   var newConstraint = {};
   const baseLexer = getLexer(nameSpaceA, nameSpaceB);
-  var baseTokens = baseLexer.tokenize(constraint.value).tokens;
+  var baseTokens = baseLexer.tokenize(constraint.content).tokens;
   let preparedConstraintValue = "";
   baseTokens.forEach((token) => {
     let image;
@@ -35,9 +35,9 @@ module.exports = function(nameSpaceA, nameSpaceB, constraint) {
 
     preparedConstraintValue += " " + image;
   });
-  newConstraint.value = preparedConstraintValue;
+  newConstraint.content = preparedConstraintValue;
   newConstraint.tokens = prepareTokens(
-    ConstraintLexer.tokenize(newConstraint.value).tokens
+    ConstraintLexer.tokenize(newConstraint.content).tokens
   );
   if (constraint.type == "necessary") return newConstraint;
   else {

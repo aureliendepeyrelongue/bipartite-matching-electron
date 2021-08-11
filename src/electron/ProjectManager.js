@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { constantCase } from "constant-case";
-import { normalize } from "normalize-diacritics";
 import removeAccents from "remove-accents";
 
 class ProjectManager {

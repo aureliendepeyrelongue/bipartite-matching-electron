@@ -6,13 +6,21 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
 import ProjectManager from "./electron/ProjectManager";
 import parseCSV from "./electron/parseCSV";
+import fs from "fs";
+import path from "path";
+import { constantCase } from "constant-case";
+import removeAccents from "remove-accents";
+
+import MatchingProcess from "./electron/matching/MatchingProcess";
 
 const pm = new ProjectManager("Default project");
-// Scheme must be registered before the app is ready
 
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } },
 ]);
+const sendProjectToView = (win) => {
+  win.webContents.send("project-updated", pm.base);
+};
 
 const createMenu = (win) => {
   const template = [
@@ -27,16 +35,36 @@ const createMenu = (win) => {
         },
         {
           label: "Importer un projet",
-          click() {
-            dialog.showOpenDialog({
+          async click() {
+            const result = await dialog.showOpenDialog({
               properties: ["openFile"],
               filters: [{ name: "Project", extensions: ["bmatch"] }],
             });
+            const data = fs.readFileSync(result.filePaths[0]);
+            pm.base = JSON.parse(data);
+            sendProjectToView(win);
           },
         },
 
         {
           label: "Enregistrer",
+          async click() {
+            try {
+              const result = await dialog.showOpenDialog({
+                properties: ["openDirectory"],
+              });
+              let filePath = path.join(
+                result.filePaths[0],
+                `${constantCase(
+                  removeAccents(pm.base.name)
+                ).toLowerCase()}.bmatch`
+              );
+              console.log(filePath);
+              const data = fs.writeFileSync(filePath, JSON.stringify(pm.base));
+            } catch (err) {
+              console.error(err);
+            }
+          },
         },
         {
           label: "Enregistrer sous",
@@ -110,10 +138,6 @@ app.on("ready", async () => {
   createWindow();
 });
 
-const sendProjectToView = (win) => {
-  win.webContents.send("project-updated", pm.base);
-};
-
 const eventManager = (win) => {
   var csvFilters = [{ name: "Données", extensions: ["csv"] }];
   var matchResults = null;
@@ -122,6 +146,7 @@ const eventManager = (win) => {
     sendProjectToView(win);
   });
   ipcMain.on("project-created", (event, projectName) => {
+    pm.createProject(projectName);
     sendProjectToView(win);
   });
   ipcMain.on("load-table-a", (event) => {
@@ -199,6 +224,27 @@ const eventManager = (win) => {
       sendProjectToView(win);
     }
   );
+
+  ipcMain.on("start-matching", (event) => {
+    try {
+      const mp = new MatchingProcess(
+        pm.base.tables.tableA.data,
+        pm.base.tables.tableB.data,
+        pm.base.constraints.filter((c) => c.type === "necessary"),
+        pm.base.constraints.filter((c) => c.type === "secondary")
+      );
+      mp.prepareConstraints();
+      mp.prepareData(
+        pm.base.tables.tableA.columns,
+        pm.base.tables.tableB.columns
+      );
+
+      mp.startMatchingProcess();
+      console.log(mp.getResult().couples[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };
 
 // Exit cleanly on request from parent process in development mode.
