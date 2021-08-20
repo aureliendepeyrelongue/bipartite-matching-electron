@@ -9,6 +9,7 @@
               v-model="formModel.name"
               required
               type="text"
+              autofocus
               placeholder="Nom"
             ></b-form-input>
           </b-form-group>
@@ -20,12 +21,12 @@
           }"
         >
           <b-form-group
-            id="input-group-3"
+            id="input-group-2"
             label="Type de contrainte"
-            label-for="input-3"
+            label-for="input-2"
           >
             <b-form-select
-              id="input-3"
+              id="input-2"
               v-model="formModel.type"
               required
               :options="constraintsType"
@@ -35,13 +36,13 @@
 
         <div v-if="formModel.type === 'secondary'" class="col-sm-3">
           <b-form-group
-            id="input-group-1"
+            id="input-group-3"
             label="Poids de la contrainte"
             :disabled="true"
-            label-for="input-1"
+            label-for="input-3"
           >
             <b-form-input
-              id="input-1"
+              id="input-3"
               v-model.number="formModel.weight"
               type="number"
             ></b-form-input>
@@ -51,7 +52,7 @@
 
       <label>Contenu</label>
       <MonacoEditor ref="editor" :content="formModel.content" />
-      <label for="">Description</label>
+      <label for="textarea">Description</label>
       <b-form-textarea
         id="textarea"
         v-model="formModel.description"

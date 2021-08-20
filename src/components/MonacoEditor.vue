@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div ref="editor" id="editor"></div>
+    <div
+      ref="editor"
+      id="editor"
+      :class="{
+        'default-size': !smallSize,
+        'small-size': smallSize,
+      }"
+    ></div>
   </div>
 </template>
 
@@ -21,6 +28,17 @@ export default {
     content: {
       type: String,
     },
+
+    createOptions: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    smallSize: {
+      type: Boolean,
+      default: false,
+    },
   },
   mounted() {
     this.$nextTick(function() {
@@ -38,6 +56,7 @@ export default {
             [/-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/, "number-token"],
             ["not", "not-token"],
             ["and", "and-token"],
+            ["or", "or-token"],
           ],
         },
       });
@@ -50,14 +69,16 @@ export default {
           { token: "var-token", fontStyle: "italic" },
           { token: "string-token", foreground: "F1556C", fontStyle: "italic" },
           { token: "number-token", foreground: "F1556C" },
+          { token: "or-token", foreground: "F1556C", fontStyle: "bold" },
           { token: "and-token", foreground: "F1556C", fontStyle: "bold" },
-          { token: "not-token", foreground: "F1556C", fontStyle: "bold" },
+          { token: "not-token", foreground: "222222", fontStyle: "bold" },
         ],
       });
       this.editor = monaco.editor.create(this.$refs.editor, {
         theme: "mentoringTheme",
         value: this.content,
         language: "mentoringLanguage",
+        ...this.createOptions,
       });
 
       this.completionProvider = monaco.languages.registerCompletionItemProvider(
@@ -118,7 +139,11 @@ export default {
 </script>
 
 <style scoped>
-#editor {
-  height: 300px;
+.default-size {
+  min-height: 300px;
+}
+
+.small-size {
+  min-height: 150px;
 }
 </style>

@@ -291,7 +291,7 @@ class ConstraintParser extends EmbeddedActionsParser {
           {
             ALT: () => {
               $.CONSUME(And);
-              $.MANY2(() => {
+              $.AT_LEAST_ONE2(() => {
                 $.OR2([
                   {
                     ALT: () => {
@@ -314,7 +314,7 @@ class ConstraintParser extends EmbeddedActionsParser {
           {
             ALT: () => {
               $.CONSUME1(Or);
-              $.MANY3(() => {
+              $.AT_LEAST_ONE3(() => {
                 $.OR3([
                   {
                     ALT: () => {

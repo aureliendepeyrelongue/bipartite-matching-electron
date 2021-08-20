@@ -9,39 +9,14 @@
             <div class="card">
               <div class="card-body" v-if="subpage === 'home'">
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-12 text-left">
                     <a
                       href="#"
-                      class="btn btn-primary waves-effect waves-light"
+                      class="btn btn-outline-primary waves-effect waves-light"
                       @click="addConstraint()"
                     >
                       <i class="fe-plus mr-1"></i>Ajouter une contrainte
                     </a>
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="float-sm-right mt-3 mt-sm-0">
-                      <div class="form-inline">
-                        <div class="mb-3 mb-sm-0 mr-sm-2">
-                          <form>
-                            <div class="position-relative">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Search..."
-                              />
-                            </div>
-                          </form>
-                        </div>
-                        <b-dropdown variant="light" right>
-                          <template v-slot:button-content>
-                            <i class="mdi mdi-filter-variant"></i>
-                          </template>
-                          <b-dropdown-item>Due Date</b-dropdown-item>
-                          <b-dropdown-item>Added Date</b-dropdown-item>
-                          <b-dropdown-item>Assignee</b-dropdown-item>
-                        </b-dropdown>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
@@ -61,7 +36,10 @@
                       </a>
                     </h5>
                     <b-collapse visible id="taskcollapse1">
-                      <div class="table-responsive mt-3">
+                      <div
+                        class="table-responsive mt-3"
+                        v-if="necessaryConstraints.length"
+                      >
                         <table
                           class="table table-centered table-nowrap table-borderless table-sm"
                         >
@@ -101,7 +79,10 @@
                                       ></i>
                                     </a>
                                   </li>
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="seeDetails(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -109,7 +90,10 @@
                                       <i class="mdi mdi-eye-outline"></i>
                                     </a>
                                   </li>
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="deleteConstraint(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -122,6 +106,12 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div v-else class="mt-2">
+                        <b-alert variant="info" show>
+                          Aucune contrainte nécessaire n'est présente dans le
+                          projet pour le moment.
+                        </b-alert>
                       </div>
                     </b-collapse>
                   </div>
@@ -141,7 +131,10 @@
                       </a>
                     </h5>
                     <b-collapse visible id="taskcollapse2">
-                      <div class="table-responsive mt-3">
+                      <div
+                        class="table-responsive mt-3"
+                        v-if="secondaryConstraints.length"
+                      >
                         <table
                           class="table table-centered table-nowrap table-borderless table-sm"
                         >
@@ -184,7 +177,10 @@
                                       ></i>
                                     </a>
                                   </li>
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="seeDetails(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -192,7 +188,10 @@
                                       <i class="mdi mdi-eye-outline"></i>
                                     </a>
                                   </li>
-                                  <li class="list-inline-item">
+                                  <li
+                                    class="list-inline-item"
+                                    @click="deleteConstraint(c)"
+                                  >
                                     <a
                                       href="javascript:void(0);"
                                       class="action-icon px-1"
@@ -205,6 +204,12 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div v-else class="mt-2">
+                        <b-alert variant="info" show>
+                          Aucune contrainte secondaire n'est présente dans le
+                          projet pour le moment.
+                        </b-alert>
                       </div>
                     </b-collapse>
                   </div>
@@ -225,6 +230,12 @@
                   />
                 </div>
               </div>
+              <div v-if="subpage === 'seedetails'">
+                <ConstraintDetails
+                  @on-return="subpage = 'home'"
+                  :form="selectedConstraint"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -239,14 +250,15 @@ import PageHeader from "@/components/Page-header";
 import appConfig from "../../../../app.config";
 import { mapState } from "vuex";
 import { ipcRenderer } from "electron";
-
 import ConstraintForm from "@/components/ConstraintForm";
+import ConstraintDetails from "@/components/ConstraintDetails";
 
 export default {
   components: {
     Layout,
     PageHeader,
     ConstraintForm,
+    ConstraintDetails,
   },
   page: {
     title: "Task-list",
@@ -289,39 +301,96 @@ export default {
       title: "Contraintes",
       selectedConstraint: {},
       subpage: "home",
+      pendingAlert: false,
+      pendingRequest: {
+        mode: "",
+        form: {},
+      },
+      askingValidation: false,
+      sendValidation: true,
       items: [
         {
-          text: "Minton",
+          text: "Bmatch",
           href: "/",
         },
         {
-          text: "Apps",
+          text: "Projet",
           href: "/",
         },
         {
-          text: "File Manager",
+          text: "Contraintes",
           active: true,
         },
       ],
     };
   },
-  mounted() {},
+  mounted() {
+    this.init();
+  },
 
   methods: {
+    init() {
+      ipcRenderer.removeAllListeners("constraint-validation-response");
+      ipcRenderer.on(
+        "constraint-validation-response",
+        (event, validationResponse) => {
+          if (validationResponse.message === "validation-success") {
+            if (this.pendingRequest.mode === "add") {
+              ipcRenderer.send("add-constraint", this.pendingRequest.form);
+            } else if (this.pendingRequest.mode === "edit") {
+              ipcRenderer.send("edit-constraint", this.pendingRequest.form);
+            }
+            this.subpage = "home";
+          } else {
+            this.$bvToast.toast(
+              `La syntaxe de votre contrainte n'est pas correcte, assurez vous de respecter la syntaxe préconnisée.`,
+              {
+                title: "Erreur de syntaxe",
+                autoHideDelay: 5000,
+                variant: "danger",
+                appendToast: true,
+              }
+            );
+          }
+          this.askingValidation = false;
+        }
+      );
+    },
+    seeDetails(c) {
+      this.selectedConstraint = this.constraints.find((c2) => c2.id === c.id);
+      this.subpage = "seedetails";
+    },
     handleEditMode(c) {
       this.selectedConstraint = this.constraints.find((c2) => c2.id === c.id);
       this.subpage = "edit";
     },
+    deleteConstraint(c) {
+      ipcRenderer.send("delete-constraint", c.id);
+      /*  if (confirm("Etes-vous sûr de vouloir supprimer cette contrainte ?")) {
+      }*/
+    },
     handleConstraintFormSave(form) {
-      this.subpage = "home";
-      ipcRenderer.send("add-constraint", form);
+      if (!this.askingValidation) {
+        this.askingValidation = true;
+        this.pendingRequest = {
+          mode: "add",
+          form,
+        };
+        ipcRenderer.send("ask-constraint-validation", form.content);
+      }
     },
     handleConstraintFormCancel() {
       this.subpage = "home";
     },
     handleConstraintFormEdit(form) {
-      this.subpage = "home";
-      ipcRenderer.send("edit-constraint", form);
+      if (!this.askingValidation) {
+        this.askingValidation = true;
+        this.pendingRequest = {
+          mode: "edit",
+          form,
+        };
+        ipcRenderer.send("ask-constraint-validation", form.content);
+      }
     },
     addConstraint() {
       this.subpage = "add";

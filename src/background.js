@@ -10,6 +10,8 @@ import fs from "fs";
 import path from "path";
 import { constantCase } from "constant-case";
 import removeAccents from "remove-accents";
+const { Parser } = require("json2csv");
+import validateConstraintContent from "./electron/chevrotain/validateConstraintContent";
 
 import MatchingProcess from "./electron/matching/MatchingProcess";
 
@@ -59,7 +61,6 @@ const createMenu = (win) => {
                   removeAccents(pm.base.name)
                 ).toLowerCase()}.bmatch`
               );
-              console.log(filePath);
               const data = fs.writeFileSync(filePath, JSON.stringify(pm.base));
             } catch (err) {
               console.error(err);
@@ -67,13 +68,26 @@ const createMenu = (win) => {
           },
         },
         {
-          label: "Enregistrer sous",
+          label: "Renommer le projet",
+          click() {
+            win.webContents.send("rename-project");
+          },
         },
       ],
     },
     {
       label: "Fenêtre",
       submenu: [{ label: "Quitter" }],
+    },
+    {
+      label: "Langues",
+      submenu: [
+        { label: "Français" },
+        { label: "English" },
+        { label: "Espanol" },
+        { label: "Chinese" },
+        { label: "Arabic" },
+      ],
     },
   ];
 
@@ -145,6 +159,10 @@ const eventManager = (win) => {
   ipcMain.on("app-loaded", (event) => {
     sendProjectToView(win);
   });
+  ipcMain.on("project-renamed", (event, projectName) => {
+    pm.setProjectName(projectName);
+    sendProjectToView(win);
+  });
   ipcMain.on("project-created", (event, projectName) => {
     pm.createProject(projectName);
     sendProjectToView(win);
@@ -165,7 +183,6 @@ const eventManager = (win) => {
       })
       .then(({ tableAPath, data }) => {
         pm.setTable("A", tableAPath, data);
-        event.reply("table-a-loaded", pm.base.tables.tableA);
         sendProjectToView(win);
       })
       .catch((err) => {
@@ -210,10 +227,65 @@ const eventManager = (win) => {
     }
   );
   ipcMain.on("update-columns", (event, { type, columns }) => {
-    console.log(type);
-    console.log(columns);
     pm.updateColumns(type, columns);
     sendProjectToView(win);
+  });
+
+  ipcMain.on("csv-export", async (event) => {
+    try {
+      const result = await dialog.showOpenDialog({
+        properties: ["openDirectory"],
+      });
+
+      const pairsParser = new Parser({
+        fields: pm.base.matchingResult.pairsColumns,
+        delimiter: ";",
+      });
+      const pairsCSV = pairsParser.parse(pm.base.matchingResult.pairs);
+
+      let filePathPairs = path.join(
+        result.filePaths[0],
+        `${constantCase(removeAccents(pm.base.name)).toLowerCase()}_pairs.csv`
+      );
+
+      const rejectedAParser = new Parser({
+        fields: pm.base.tables.tableA.columns.map((c) => c.origin),
+        delimiter: ";",
+      });
+      const rejectedACSV = rejectedAParser.parse(
+        pm.base.matchingResult.rejectedA
+      );
+
+      let filePathRejectedA = path.join(
+        result.filePaths[0],
+        `${constantCase(
+          removeAccents(pm.base.name)
+        ).toLowerCase()}_rejected_mentees.csv`
+      );
+
+      const rejectedBParser = new Parser({
+        fields: pm.base.tables.tableB.columns.map((c) => c.origin),
+        delimiter: ";",
+      });
+      const rejectedBCSV = rejectedBParser.parse(
+        pm.base.matchingResult.rejectedB
+      );
+
+      let filePathRejectedB = path.join(
+        result.filePaths[0],
+        `${constantCase(
+          removeAccents(pm.base.name)
+        ).toLowerCase()}_rejected_mentors.csv`
+      );
+
+      fs.writeFileSync(filePathPairs, pairsCSV);
+      fs.writeFileSync(filePathRejectedA, rejectedACSV);
+      fs.writeFileSync(filePathRejectedB, rejectedBCSV);
+
+      sendProjectToView(win);
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   ipcMain.on(
@@ -225,8 +297,14 @@ const eventManager = (win) => {
     }
   );
 
+  ipcMain.on("delete-constraint", (event, id) => {
+    pm.deleteConstraint(id);
+    sendProjectToView(win);
+  });
+
   ipcMain.on("start-matching", (event) => {
     try {
+      if (pm.base.tables.tableA.empty || pm.base.tables.tableB.empty) return;
       const mp = new MatchingProcess(
         pm.base.tables.tableA.data,
         pm.base.tables.tableB.data,
@@ -238,9 +316,22 @@ const eventManager = (win) => {
         pm.base.tables.tableA.columns,
         pm.base.tables.tableB.columns
       );
-
       mp.startMatchingProcess();
-      console.log(mp.getResult().couples[0]);
+      pm.setMatchingResult(mp.getResult());
+      sendProjectToView(win);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  ipcMain.on("ask-constraint-validation", (event, content) => {
+    try {
+      const validationResult = validateConstraintContent(
+        "mentee",
+        "mentor",
+        content
+      );
+      return event.reply("constraint-validation-response", validationResult);
     } catch (err) {
       console.log(err);
     }

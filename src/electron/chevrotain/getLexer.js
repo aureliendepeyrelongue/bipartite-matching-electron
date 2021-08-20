@@ -6,6 +6,15 @@ module.exports = (partANamespace, partBNamespace) => {
     name: "NumberLiteral",
     pattern: /-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/,
   });
+  const LPLitteral = createToken({
+    name: "LPLitteral",
+    pattern: "(",
+  });
+
+  const RPLitteral = createToken({
+    name: "RPLitteral",
+    pattern: ")",
+  });
 
   const PartAVar = createToken({
     name: "PartAVar",
@@ -94,6 +103,8 @@ module.exports = (partANamespace, partBNamespace) => {
     WhiteSpace,
     NumberLiteral,
     StringLiteral,
+    LPLitteral,
+    RPLitteral,
     Or,
     And,
     Not,

@@ -5,18 +5,162 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="header-title">Advanced Data Table</h4>
-
-            <p class="text-muted font-13 mb-4"></p>
             <div class="row mb-md-2">
-              <div class="col-sm-3">
+              <div class="col-sm-12">
                 <a
                   href="#"
-                  class="btn btn-primary waves-effect waves-light"
+                  class="btn btn-outline-primary waves-effect waves-light"
                   @click="startMatching()"
                 >
                   <i class="fe-plus mr-1"></i>Lancer le matching
                 </a>
+                <a
+                  href="#"
+                  class="btn btn-outline-success waves-effect ml-2 waves-light"
+                  @click="exportCSV()"
+                >
+                  <i class="fe-download mr-1"></i>Exporter au format CSV
+                </a>
+              </div>
+            </div>
+            <div
+              v-if="
+                !(
+                  matchingResult &&
+                  ((matchingResult.pairs && matchingResult.pairs.length) ||
+                    (matchingResult.rejectedA &&
+                      matchingResult.rejectedA.length) ||
+                    (matchingResult.rejectedB &&
+                      matchingResult.rejectedB.length))
+                )
+              "
+              class="mt-2"
+            >
+              <b-alert variant="info" show>
+                Aucun matching n'a été lancé pour ce projet pour le moment.
+              </b-alert>
+            </div>
+            <div
+              v-if="
+                matchingResult &&
+                  matchingResult.pairs &&
+                  matchingResult.pairs.length
+              "
+            >
+              <h5 class="mt-4">
+                Binômes trouvés
+                <span v-if="matchingResult && matchingResult.pairs"
+                  >({{ matchingResult.pairs.length / 2 }})</span
+                >
+              </h5>
+
+              <div class="table-responsive mb-0">
+                <b-table
+                  :responsive="true"
+                  :per-page="perPage"
+                  :current-page="currentPagePairs"
+                  v-if="matchingResult.pairs"
+                  :items="pairsComputed"
+                  :fields="matchingResult.pairsColumns"
+                ></b-table>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers float-right"
+                  >
+                    <ul class="pagination pagination-rounded mb-0">
+                      <!-- pagination -->
+                      <b-pagination
+                        v-model="currentPagePairs"
+                        :total-rows="rowsPairs"
+                        :per-page="perPage"
+                      ></b-pagination>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="
+                matchingResult &&
+                  matchingResult.rejectedA &&
+                  matchingResult.rejectedA.length
+              "
+            >
+              <h5 class="mt-5">
+                Mentees rejetés
+                <span v-if="matchingResult && matchingResult.rejectedA"
+                  >({{ matchingResult.rejectedA.length }})</span
+                >
+              </h5>
+
+              <div class="table-responsive mb-0">
+                <b-table
+                  :responsive="true"
+                  :per-page="perPage"
+                  :current-page="currentPageA"
+                  v-if="matchingResult.rejectedA"
+                  :items="rejectedAComputed"
+                  :fields="tables.tableA.columns.map((c) => c.orign)"
+                ></b-table>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers float-right"
+                  >
+                    <ul class="pagination pagination-rounded mb-0">
+                      <!-- pagination -->
+                      <b-pagination
+                        v-model="currentPageA"
+                        :total-rows="rowsRejectedA"
+                        :per-page="perPage"
+                      ></b-pagination>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="
+                matchingResult &&
+                  matchingResult.rejectedB &&
+                  matchingResult.rejectedB.length
+              "
+            >
+              <h5 class="mt-5">
+                Mentors rejetés
+                <span v-if="matchingResult && matchingResult.rejectedB"
+                  >({{ matchingResult.rejectedB.length }})</span
+                >
+              </h5>
+
+              <div class="table-responsive mb-0">
+                <b-table
+                  :responsive="true"
+                  :per-page="perPage"
+                  :current-page="currentPageB"
+                  v-if="matchingResult.rejectedB"
+                  :items="rejectedBComputed"
+                  :fields="tables.tableB.columns.map((c) => c.orign)"
+                ></b-table>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="dataTables_paginate paging_simple_numbers float-right"
+                  >
+                    <ul class="pagination pagination-rounded mb-0">
+                      <!-- pagination -->
+                      <b-pagination
+                        v-model="currentPageB"
+                        :total-rows="rowsRejectedB"
+                        :per-page="perPage"
+                      ></b-pagination>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -33,6 +177,7 @@ import Layout from "../../layouts/main";
 import PageHeader from "@/components/Page-header";
 import appConfig from "../../../../app.config";
 import { ipcRenderer } from "electron";
+import { mapState } from "vuex";
 
 /**
  * Advanced Table component
@@ -48,78 +193,104 @@ export default {
   },
   data() {
     return {
-      tableData: tableData,
-      title: "Matching",
       items: [
         {
-          text: "Minton",
+          text: "Bmatch",
           href: "/",
         },
         {
-          text: "Tables",
+          text: "Projet",
           href: "/",
         },
         {
-          text: "Advanced",
+          text: "Matching",
           active: true,
         },
       ],
-      totalRows: 1,
-      currentPage: 1,
+      currentPagePairs: 1,
+      currentPageA: 1,
+      currentPageB: 1,
+
+      title: "Matching",
+
       perPage: 10,
-      pageOptions: [10, 25, 50, 100],
-      filter: null,
-      filterOn: [],
-      sortBy: "age",
-      sortDesc: false,
-      fields: [
-        {
-          key: "name",
-          sortable: true,
-        },
-        {
-          key: "position",
-          sortable: true,
-        },
-        {
-          key: "office",
-          sortable: true,
-        },
-        {
-          key: "age",
-          sortable: true,
-        },
-        {
-          key: "date",
-          sortable: true,
-        },
-        {
-          key: "salary",
-          sortable: true,
-        },
-      ],
     };
   },
   computed: {
-    /**
-     * Total no. of records
-     */
-    rows() {
-      return this.tableData.length;
+    rowsPairs() {
+      return this.matchingResult && this.matchingResult.pairs
+        ? this.matchingResult.pairs.length
+        : 0;
+    },
+    rowsRejectedA() {
+      return this.matchingResult && this.matchingResult.rejectedA
+        ? this.matchingResult.rejectedA.length
+        : 0;
+    },
+    rowsRejectedB() {
+      return this.matchingResult && this.matchingResult.rejectedB
+        ? this.matchingResult.rejectedB.length
+        : 0;
+    },
+
+    ...mapState({
+      matchingResult: (state) =>
+        JSON.parse(JSON.stringify(state.project.base.matchingResult)),
+      tables: (state) => JSON.parse(JSON.stringify(state.project.base.tables)),
+    }),
+
+    pairsComputed() {
+      const newTable = this.matchingResult.pairs;
+      newTable.forEach((el) => {
+        for (let name in el) {
+          let val = el[name];
+          el[name] = this.formatField(val);
+        }
+      });
+      return newTable;
+    },
+    rejectedAComputed() {
+      const newTable =
+        this.matchingResult && this.matchingResult.rejectedA
+          ? this.matchingResult.rejectedA
+          : [];
+
+      newTable.forEach((el) => {
+        for (let name in el) {
+          let val = el[name];
+          el[name] = this.formatField(val);
+        }
+      });
+      return newTable;
+    },
+    rejectedBComputed() {
+      const newTable =
+        this.matchingResult && this.matchingResult.rejectedB
+          ? this.matchingResult.rejectedB
+          : [];
+
+      newTable.forEach((el) => {
+        for (let name in el) {
+          let val = el[name];
+          el[name] = this.formatField(val);
+        }
+      });
+      return newTable;
     },
   },
-  mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
-  },
+
   methods: {
+    exportCSV() {
+      console.log("export csv trial");
+      ipcRenderer.send("csv-export");
+    },
+    formatField(str) {
+      if (typeof str === "string")
+        return str.length > 40 ? str.substring(0, 40) + "..." : str;
+      else return str;
+    },
     startMatching() {
       ipcRenderer.send("start-matching");
-    },
-    onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
     },
   },
   middleware: "router-auth",

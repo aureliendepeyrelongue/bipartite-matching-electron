@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { constantCase } from "constant-case";
 import removeAccents from "remove-accents";
 
+const NA_SYMBOL = "N/A";
 class ProjectManager {
   constructor(projectName) {
     this.createProject(projectName);
@@ -26,6 +27,85 @@ class ProjectManager {
         rejectedA: [],
         rejectedB: [],
       },
+    };
+  }
+
+  setProjectName(projectName) {
+    this.base.name = projectName;
+  }
+
+  setMatchingResult(matchingProcessResult) {
+    let finalPairsColumns = [],
+      finalPairs = [];
+
+    this.base.tables.tableA.columns.forEach((c) => {
+      finalPairsColumns.push(c.origin);
+    });
+
+    this.base.tables.tableB.columns.forEach((c) => {
+      if (!finalPairsColumns.includes(c.origin))
+        finalPairsColumns.push(c.origin);
+    });
+
+    matchingProcessResult.couples.forEach((couple, index) => {
+      let menteeLine = {};
+      for (let name in couple.mentee) {
+        const col = this.base.tables.tableA.columns.find(
+          (c) => "aa:" + c.target === name
+        );
+        menteeLine[col.origin] = couple.mentee[name];
+      }
+
+      let mentorLine = {};
+      for (let name in couple.mentor) {
+        const col = this.base.tables.tableB.columns.find(
+          (c) => "bb:" + c.target === name
+        );
+        mentorLine[col.origin] = couple.mentor[name];
+      }
+
+      let fMenteeLine = {},
+        fMentorLine = {};
+      finalPairsColumns.forEach((fpc) => {
+        fMenteeLine[fpc] =
+          menteeLine[fpc] !== undefined ? menteeLine[fpc] : NA_SYMBOL;
+        fMentorLine[fpc] =
+          mentorLine[fpc] !== undefined ? mentorLine[fpc] : NA_SYMBOL;
+      });
+      let pIndex = index + 1;
+      finalPairs.push({ ...{ Pair_ID: pIndex }, ...fMenteeLine });
+      finalPairs.push({ ...{ Pair_ID: pIndex }, ...fMentorLine });
+    });
+
+    let rejectedA = [];
+    matchingProcessResult.discharges.mentees.forEach((mentee) => {
+      let menteeLine = {};
+      for (let name in mentee) {
+        const col = this.base.tables.tableA.columns.find(
+          (c) => "aa:" + c.target === name
+        );
+        menteeLine[col.origin] = mentee[name];
+      }
+      rejectedA.push(menteeLine);
+    });
+
+    let rejectedB = [];
+    matchingProcessResult.discharges.mentors.forEach((mentor) => {
+      let mentorLine = {};
+      for (let name in mentor) {
+        const col = this.base.tables.tableB.columns.find(
+          (c) => "bb:" + c.target === name
+        );
+        mentorLine[col.origin] = mentor[name];
+      }
+      rejectedB.push(mentorLine);
+    });
+
+    this.base.matchingResult = {
+      pairs: finalPairs,
+      pairsColumns: ["Pair_ID", ...finalPairsColumns],
+      rejectedA,
+      rejectedB,
     };
   }
 
@@ -56,6 +136,14 @@ class ProjectManager {
 
   updateColumns(tableType, columns) {
     this.base.tables[`table${tableType}`].columns = columns;
+  }
+
+  deleteConstraint(id) {
+    const toRemove = this.base.constraints.find((c) => c.id === id);
+    console.log(toRemove);
+    const index = this.base.constraints.indexOf(toRemove);
+    console.log(index);
+    if (index > -1) this.base.constraints.splice(index, 1);
   }
 
   deleteColumnTarget(tableType, id, origin) {

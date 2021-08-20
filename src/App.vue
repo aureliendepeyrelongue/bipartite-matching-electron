@@ -4,12 +4,12 @@
     <b-modal
       id="new-project-modal"
       scrollable
-      title="Nouveau projet"
+      :title="udpateProjectNameOnly ? 'Renommer le projet' : 'Nouveau projet'"
       title-tag="h5"
       size="md"
       @ok="createNewProject"
     >
-      <b-form @submit="onSubmit">
+      <b-form>
         <b-form-group
           id="input-group-1"
           label="Nom du projet"
@@ -31,6 +31,7 @@ import { ipcRenderer } from "electron";
 export default {
   data() {
     return {
+      udpateProjectNameOnly: false,
       projectName: "",
     };
   },
@@ -41,14 +42,25 @@ export default {
     ipcRenderer.on("create-new-project", (event, base) => {
       this.$bvModal.show("new-project-modal");
     });
+    ipcRenderer.on("rename-project", (event, base) => {
+      this.udpateProjectNameOnly = true;
+      this.$bvModal.show("new-project-modal");
+    });
+
+    this.$i18n.locale = "en";
+
     ipcRenderer.send("app-loaded");
   },
 
   methods: {
     createNewProject() {
-      ipcRenderer.send("project-created", this.projectName);
+      if (this.udpateProjectNameOnly) {
+        ipcRenderer.send("project-renamed", this.projectName);
+        this.udpateProjectNameOnly = false;
+      } else ipcRenderer.send("project-created", this.projectName);
+
+      this.projectName = "";
     },
-    onSubmit() {},
   },
 };
 </script>

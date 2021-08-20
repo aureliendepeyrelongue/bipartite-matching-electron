@@ -5,26 +5,32 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <div
-              class="fileupload btn btn-success waves-effect waves-light mb-3"
-              @click="uploadTableA()"
-            >
-              <span>
-                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau
-                mentees
-              </span>
+            <div class="text-left">
+              <div
+                class="fileupload btn btn-outline-primary waves-effect waves-light mb-3"
+                @click="uploadTableA()"
+              >
+                <span>
+                  <i class="mdi mdi-cloud-upload mr-1"></i>
+                  {{ $t("tables.menteesTables") }}
+                </span>
+              </div>
+              <div
+                class="fileupload btn btn-outline-primary waves-effect waves-light ml-2 mb-3"
+                @click="uploadTableB()"
+              >
+                <span>
+                  <i class="mdi mdi-cloud-upload mr-1"></i>
+                  {{ $t("tables.mentorsTables") }}
+                </span>
+              </div>
             </div>
-            <div
-              class="fileupload btn btn-success waves-effect waves-light ml-2 mb-3"
-              @click="uploadTableB()"
-            >
-              <span>
-                <i class="mdi mdi-cloud-upload mr-1"></i> Uploader le tableau
-                mentors
-              </span>
-            </div>
+
             <!-- Table -->
-            <div class="table-responsive">
+            <div
+              class="table-responsive"
+              v-if="fileManagerData && fileManagerData.length"
+            >
               <table class="table table-centered mb-0">
                 <thead class="font-13 bg-light text-muted">
                   <tr>
@@ -59,7 +65,7 @@
                     </td>
                     <td>
                       <a href="javascript:void(0);" class="text-dark">{{
-                        tableData.type
+                        tableData.type === "A" ? "Mentees" : "Mentors"
                       }}</a>
                     </td>
                     <td class="text-muted font-13">{{ tableData.date }}</td>
@@ -89,6 +95,11 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div v-else>
+              <b-alert variant="info" show>
+                Aucun tableau n'a été importé pour le momment.
+              </b-alert>
             </div>
             <!-- End table -->
             <div
@@ -326,36 +337,41 @@ export default {
   },
   data() {
     return {
+      items: [
+        {
+          text: "Bmatch",
+          href: "/",
+        },
+        {
+          text: "Projet",
+          href: "/",
+        },
+        {
+          text: this.$t("tables.title"),
+          active: true,
+        },
+      ],
       selectedType: "",
       columnsTypeOptions: [
         { value: "string", text: "Texte" },
         { value: "number", text: "Nombre" },
       ],
       selectedTable: null,
-      title: "Tableaux",
+      title: this.$t("tables.title"),
       currentPageA: 1,
       currentPageB: 1,
 
       perPage: 20,
-      items: [
-        {
-          text: "Apps",
-          href: "/",
-        },
-        {
-          text: "Tableaux",
-          active: true,
-        },
-      ],
+
       constantName: "",
       constantValue: "",
     };
   },
 
   mounted() {
-    ipcRenderer.on("constant-added", (event, constant) => {
+    /* ipcRenderer.on("constant-added", (event, constant) => {
       this.selectedTable.constants.push(constant);
-    });
+    });*/
   },
   methods: {
     formatField(str) {
