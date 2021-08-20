@@ -12,14 +12,14 @@
                   class="btn btn-outline-primary waves-effect waves-light"
                   @click="startMatching()"
                 >
-                  <i class="fe-plus mr-1"></i>Lancer le matching
+                  <i class="fe-plus mr-1"></i>{{ $t("matching.start") }}
                 </a>
                 <a
                   href="#"
                   class="btn btn-outline-success waves-effect ml-2 waves-light"
                   @click="exportCSV()"
                 >
-                  <i class="fe-download mr-1"></i>Exporter au format CSV
+                  <i class="fe-download mr-1"></i>{{ $t("matching.exportCSV") }}
                 </a>
               </div>
             </div>
@@ -37,7 +37,7 @@
               class="mt-2"
             >
               <b-alert variant="info" show>
-                Aucun matching n'a été lancé pour ce projet pour le moment.
+                {{ $t("matching.noMatchingMessage") }}
               </b-alert>
             </div>
             <div
@@ -48,7 +48,7 @@
               "
             >
               <h5 class="mt-4">
-                Binômes trouvés
+                {{ $t("matching.pairsFound") }}
                 <span v-if="matchingResult && matchingResult.pairs"
                   >({{ matchingResult.pairs.length / 2 }})</span
                 >
@@ -70,7 +70,6 @@
                     class="dataTables_paginate paging_simple_numbers float-right"
                   >
                     <ul class="pagination pagination-rounded mb-0">
-                      <!-- pagination -->
                       <b-pagination
                         v-model="currentPagePairs"
                         :total-rows="rowsPairs"
@@ -89,7 +88,7 @@
               "
             >
               <h5 class="mt-5">
-                Mentees rejetés
+                {{ $t("matching.rejectedMentees") }}
                 <span v-if="matchingResult && matchingResult.rejectedA"
                   >({{ matchingResult.rejectedA.length }})</span
                 >
@@ -111,7 +110,6 @@
                     class="dataTables_paginate paging_simple_numbers float-right"
                   >
                     <ul class="pagination pagination-rounded mb-0">
-                      <!-- pagination -->
                       <b-pagination
                         v-model="currentPageA"
                         :total-rows="rowsRejectedA"
@@ -130,7 +128,7 @@
               "
             >
               <h5 class="mt-5">
-                Mentors rejetés
+                {{ $t("matching.rejectedMentors") }}
                 <span v-if="matchingResult && matchingResult.rejectedB"
                   >({{ matchingResult.rejectedB.length }})</span
                 >
@@ -152,7 +150,6 @@
                     class="dataTables_paginate paging_simple_numbers float-right"
                   >
                     <ul class="pagination pagination-rounded mb-0">
-                      <!-- pagination -->
                       <b-pagination
                         v-model="currentPageB"
                         :total-rows="rowsRejectedB"
@@ -171,20 +168,15 @@
 </template>
 
 <script>
-import { tableData } from "./data";
-
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/Page-header";
 import appConfig from "../../../../app.config";
 import { ipcRenderer } from "electron";
 import { mapState } from "vuex";
 
-/**
- * Advanced Table component
- */
 export default {
   page: {
-    title: "Advanced Table",
+    title: "Bmatch",
     meta: [{ name: "description", content: appConfig.description }],
   },
   components: {
@@ -199,11 +191,11 @@ export default {
           href: "/",
         },
         {
-          text: "Projet",
+          text: this.$t("common.project"),
           href: "/",
         },
         {
-          text: "Matching",
+          text: this.$t("matching.title"),
           active: true,
         },
       ],
@@ -211,7 +203,7 @@ export default {
       currentPageA: 1,
       currentPageB: 1,
 
-      title: "Matching",
+      title: this.$t("matching.title"),
 
       perPage: 10,
     };

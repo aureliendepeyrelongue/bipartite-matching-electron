@@ -3,14 +3,18 @@
     <b-form @submit="onSubmit">
       <div class="row">
         <div class="col-sm-6">
-          <b-form-group id="input-group-1" label="Nom" label-for="input-1">
+          <b-form-group
+            id="input-group-1"
+            :label="$t('common.name')"
+            label-for="input-1"
+          >
             <b-form-input
               id="input-1"
               v-model="formModel.name"
               required
               type="text"
               autofocus
-              placeholder="Nom"
+              :placeholder="$t('common.name')"
             ></b-form-input>
           </b-form-group>
         </div>
@@ -22,14 +26,14 @@
         >
           <b-form-group
             id="input-group-2"
-            label="Type de contrainte"
+            :label="$t('constraints.constraintType')"
             label-for="input-2"
           >
             <b-form-select
               id="input-2"
               v-model="formModel.type"
               required
-              :options="constraintsType"
+              :options="constraintsTypeComputed"
             ></b-form-select>
           </b-form-group>
         </div>
@@ -37,7 +41,7 @@
         <div v-if="formModel.type === 'secondary'" class="col-sm-3">
           <b-form-group
             id="input-group-3"
-            label="Poids de la contrainte"
+            :label="$t('constraints.constraintWeight')"
             :disabled="true"
             label-for="input-3"
           >
@@ -50,29 +54,26 @@
         </div>
       </div>
 
-      <label>Contenu</label>
+      <label>{{ $t("common.content") }}</label>
       <MonacoEditor ref="editor" :content="formModel.content" />
-      <label for="textarea">Description</label>
+      <label for="textarea">{{ $t("common.description") }}</label>
       <b-form-textarea
         id="textarea"
         v-model="formModel.description"
-        placeholder="Décrivez la contrainte afin de faciliter sa lecture (ou relecture)."
+        :placeholder="$t('constraints.descriptionPlaceholder')"
         rows="3"
         max-rows="6"
       ></b-form-textarea>
 
       <div class="text-right mt-4">
-        <b-button type="submit" class="mr-1" variant="primary"
-          >Enregistrer</b-button
-        >
-        <b-button type="reset" variant="danger" @click="$emit('on-cancel')"
-          >Annuler</b-button
-        >
+        <b-button type="submit" class="mr-1" variant="primary">{{
+          $t("common.save")
+        }}</b-button>
+        <b-button type="reset" variant="danger" @click="$emit('on-cancel')">{{
+          $t("common.cancel")
+        }}</b-button>
       </div>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ formModel }}</pre>
-    </b-card>
   </div>
 </template>
 
@@ -103,11 +104,17 @@ export default {
               weight: 5,
               description: "",
             },
-      constraintsType: [
-        { text: "Nécessaire", value: "necessary" },
-        { text: "Secondaire", value: "secondary" },
-      ],
+      constraintsType: [],
     };
+  },
+
+  computed: {
+    constraintsTypeComputed() {
+      return [
+        { text: this.$t("constraints.necessary"), value: "necessary" },
+        { text: this.$t("constraints.secondary"), value: "secondary" },
+      ];
+    },
   },
 
   watch: {

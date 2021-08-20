@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <PageHeader :title="title" :items="items" />
-
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
@@ -15,11 +14,11 @@
                       class="btn btn-outline-primary waves-effect waves-light"
                       @click="addConstraint()"
                     >
-                      <i class="fe-plus mr-1"></i>Ajouter une contrainte
+                      <i class="fe-plus mr-1"></i
+                      >{{ $t("constraints.addConstraints") }}
                     </a>
                   </div>
                 </div>
-
                 <div class="custom-accordion">
                   <div class="mt-4">
                     <h5 class="position-relative mb-0">
@@ -28,7 +27,7 @@
                         href="javascript: void(0);"
                         class="text-dark d-block"
                       >
-                        Contraintes nécessaires
+                        {{ $t("constraints.necessaryConstraints") }}
                         <span class="text-muted"
                           >({{ necessaryConstraints.length }})</span
                         >
@@ -45,10 +44,14 @@
                         >
                           <thead class="thead-light">
                             <tr class>
-                              <th scope="col">Nom</th>
-                              <th scope="col">Aperçu</th>
-                              <th scope="col">Description</th>
-                              <th scope="col" style="width: 85px">Action</th>
+                              <th scope="col">{{ $t("common.name") }}</th>
+                              <th scope="col">{{ $t("common.preview") }}</th>
+                              <th scope="col">
+                                {{ $t("common.description") }}
+                              </th>
+                              <th scope="col" style="width: 85px">
+                                {{ $t("common.actions") }}
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -60,7 +63,6 @@
                               <td>
                                 {{ c.content }}
                               </td>
-
                               <td>
                                 {{ c.description ? c.description : "--" }}
                               </td>
@@ -109,8 +111,7 @@
                       </div>
                       <div v-else class="mt-2">
                         <b-alert variant="info" show>
-                          Aucune contrainte nécessaire n'est présente dans le
-                          projet pour le moment.
+                          {{ $t("constraints.noConstraintsMessage") }}
                         </b-alert>
                       </div>
                     </b-collapse>
@@ -123,7 +124,7 @@
                         href="javascript: void(0);"
                         class="text-dark d-block"
                       >
-                        Contraintes secondaires
+                        {{ $t("constraints.secondaryConstraints") }}
                         <span class="text-muted"
                           >({{ secondaryConstraints.length }})</span
                         >
@@ -140,11 +141,17 @@
                         >
                           <thead class="thead-light">
                             <tr class>
-                              <th scope="col">Nom</th>
-                              <th scope="col">Aperçu</th>
-                              <th scope="col">Description</th>
-                              <th scope="col">Poids</th>
-                              <th scope="col" style="width: 85px">Action</th>
+                              <th scope="col">{{ $t("common.name") }}</th>
+                              <th scope="col">{{ $t("common.preview") }}</th>
+                              <th scope="col">
+                                {{ $t("common.description") }}
+                              </th>
+                              <th scope="col">
+                                {{ $t("constraints.weight") }}
+                              </th>
+                              <th scope="col" style="width: 85px">
+                                {{ $t("common.actions") }}
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -207,8 +214,7 @@
                       </div>
                       <div v-else class="mt-2">
                         <b-alert variant="info" show>
-                          Aucune contrainte secondaire n'est présente dans le
-                          projet pour le moment.
+                          {{ $t("constraints.noConstraintsMessage") }}
                         </b-alert>
                       </div>
                     </b-collapse>
@@ -261,7 +267,7 @@ export default {
     ConstraintDetails,
   },
   page: {
-    title: "Task-list",
+    title: "Bmatch",
     meta: [{ name: "description", content: appConfig.description }],
   },
 
@@ -270,6 +276,10 @@ export default {
       constraints: (state) =>
         JSON.parse(JSON.stringify(state.project.base.constraints)),
     }),
+
+    title() {
+      return this.$t("constraints.title");
+    },
 
     constraintsFormatted() {
       return this.constraints.map((c) => {
@@ -298,7 +308,6 @@ export default {
   data() {
     return {
       maxStringSize: 40,
-      title: "Contraintes",
       selectedConstraint: {},
       subpage: "home",
       pendingAlert: false,
@@ -314,11 +323,11 @@ export default {
           href: "/",
         },
         {
-          text: "Projet",
+          text: this.$t("common.project"),
           href: "/",
         },
         {
-          text: "Contraintes",
+          text: this.$t("constraints.title"),
           active: true,
         },
       ],
@@ -342,15 +351,12 @@ export default {
             }
             this.subpage = "home";
           } else {
-            this.$bvToast.toast(
-              `La syntaxe de votre contrainte n'est pas correcte, assurez vous de respecter la syntaxe préconnisée.`,
-              {
-                title: "Erreur de syntaxe",
-                autoHideDelay: 5000,
-                variant: "danger",
-                appendToast: true,
-              }
-            );
+            this.$bvToast.toast(this.$t("constraints.wrongSyntaxMessage"), {
+              title: this.$t("common.syntaxError"),
+              autoHideDelay: 5000,
+              variant: "danger",
+              appendToast: true,
+            });
           }
           this.askingValidation = false;
         }
@@ -366,8 +372,6 @@ export default {
     },
     deleteConstraint(c) {
       ipcRenderer.send("delete-constraint", c.id);
-      /*  if (confirm("Etes-vous sûr de vouloir supprimer cette contrainte ?")) {
-      }*/
     },
     handleConstraintFormSave(form) {
       if (!this.askingValidation) {

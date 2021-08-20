@@ -1,0 +1,92 @@
+{
+	"menuitems": {
+		"btables": {
+			"text": "Pinturas"
+		},
+		"constraints": {
+			"text": "Restrições"
+		},
+		"matching": {
+			"text": "Coincidindo"
+		}
+	},
+	"menu": {
+		"files": "arquivos",
+		"newProject": "Novo projeto",
+		"importProject": "Importar um projeto",
+		"save": "Registrar",
+		"renameProject": "Renomear o projeto",
+		"window": "Janela",
+		"quit": "Deixar",
+		"languages": "línguas",
+		"fr": "francês",
+		"en": "inglês",
+		"es": "espanhol",
+		"zh": "chinês",
+		"ar": "árabe",
+		"ru": "russo",
+		"du": "holandês",
+		"pt": "português",
+		"it": "italiano",
+		"de": "alemão"
+	},
+	"app": {
+		"renameProject": "Renomear o projeto",
+		"newProject": "Novo projeto",
+		"projectName": "nome do projeto"
+	},
+	"common": {
+		"back": "Retornar",
+		"syntaxError": "Erro de sintaxe",
+		"project": "Projeto",
+		"name": "Último nome",
+		"preview": "Visão geral",
+		"description": "Descrição",
+		"actions": "Ações",
+		"type": "Modelo",
+		"updatedAt": "Modificado",
+		"size": "Corte",
+		"column": "Coluna",
+		"associatedVariable": "Variável associada",
+		"lines": "linhas",
+		"mentees": "Mentees",
+		"mentors": "Mentores",
+		"text": "Texto",
+		"number": "Número",
+		"content": "Conteúdo",
+		"save": "Registrar",
+		"cancel": "cancelar"
+	},
+	"tables": {
+		"title": "Gerenciar tabelas",
+		"menteesTables": "Mesa de mentores",
+		"mentorsTables": "Mesa de mentores",
+		"columns": "Colunas",
+		"edit": "Editar tipo de coluna",
+		"noTablesMessage": "Nenhuma tabela foi importada no momento."
+	},
+	"constraints": {
+		"addConstraints": "Adicione uma restrição",
+		"title": "Restrições",
+		"noConstraintsMessage": "Nenhuma restrição necessária está presente no projeto no momento.",
+		"wrongSyntaxMessage": "A sintaxe de sua restrição não está correta, certifique-se de respeitar a sintaxe recomendada.",
+		"necessaryConstraints": "Restrições necessárias",
+		"secondaryConstraints": "Restrições secundárias",
+		"weight": "Peso",
+		"constraintDetails": "Detalhes de restrição",
+		"descriptionPlaceholder": "Descreva a restrição para facilitar sua leitura (ou releitura).",
+		"constraintType": "Tipo de restrição",
+		"constraintWeight": "Peso de estresse",
+		"necessary": "Necessário",
+		"secondary": "Secundário"
+	},
+	"matching": {
+		"rejectedMentees": "Pupilos rejeitados",
+		"rejectedMentors": "Mentores rejeitados",
+		"start": "Comece a combinar",
+		"pairsFound": "Binômios encontrados",
+		"exportCSV": "Exportar em formato CSV",
+		"noMatchingMessage": "Nenhuma correspondência foi lançada para este projeto no momento.",
+		"title": "Coincidindo"
+	}
+}

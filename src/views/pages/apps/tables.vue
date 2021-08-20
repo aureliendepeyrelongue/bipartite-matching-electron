@@ -26,7 +26,6 @@
               </div>
             </div>
 
-            <!-- Table -->
             <div
               class="table-responsive"
               v-if="fileManagerData && fileManagerData.length"
@@ -34,15 +33,17 @@
               <table class="table table-centered mb-0">
                 <thead class="font-13 bg-light text-muted">
                   <tr>
-                    <th class="font-weight-medium">Nom</th>
-                    <th class="font-weight-medium">Type</th>
-                    <th class="font-weight-medium">Modifié le</th>
-                    <th class="font-weight-medium">Taille</th>
+                    <th class="font-weight-medium">{{ $t("common.name") }}</th>
+                    <th class="font-weight-medium">{{ $t("common.type") }}</th>
+                    <th class="font-weight-medium">
+                      {{ $t("common.updatedAt") }}
+                    </th>
+                    <th class="font-weight-medium">{{ $t("common.size") }}</th>
                     <th
                       class="font-weight-medium text-center"
                       style="width: 125px"
                     >
-                      Actions
+                      {{ $t("common.actions") }}
                     </th>
                   </tr>
                 </thead>
@@ -65,12 +66,13 @@
                     </td>
                     <td>
                       <a href="javascript:void(0);" class="text-dark">{{
-                        tableData.type === "A" ? "Mentees" : "Mentors"
+                        tableData.type === "A"
+                          ? $t("common.mentees")
+                          : $t("common.mentors")
                       }}</a>
                     </td>
                     <td class="text-muted font-13">{{ tableData.date }}</td>
                     <td>{{ tableData.size }}</td>
-
                     <td>
                       <ul class="list-inline table-action m-0">
                         <li class="list-inline-item">
@@ -98,17 +100,15 @@
             </div>
             <div v-else>
               <b-alert variant="info" show>
-                Aucun tableau n'a été importé pour le momment.
+                {{ $t("tables.noTablesMessage") }}
               </b-alert>
             </div>
-            <!-- End table -->
             <div
               v-if="
                 tables.tableA && tables.tableA.data && tables.tableA.data.length
               "
             >
-              <h5>Tableau mentee</h5>
-
+              <h5>{{ $t("tables.menteesTables") }}</h5>
               <div class="table-responsive mb-0">
                 <b-table
                   :responsive="true"
@@ -125,7 +125,6 @@
                     class="dataTables_paginate paging_simple_numbers float-right"
                   >
                     <ul class="pagination pagination-rounded mb-0">
-                      <!-- pagination -->
                       <b-pagination
                         v-model="currentPageA"
                         :total-rows="rowsA"
@@ -141,8 +140,7 @@
                 tables.tableB && tables.tableB.data && tables.tableB.data.length
               "
             >
-              <h5>Tableau mentors</h5>
-
+              <h5>{{ $t("tables.mentorsTables") }}</h5>
               <div class="table-responsive mb-0">
                 <b-table
                   :responsive="true"
@@ -174,13 +172,13 @@
           <b-modal
             id="edit-tables-modal"
             scrollable
-            title="Modal title"
+            :title="$t('tables.edit')"
             title-tag="h5"
             size="lg"
             @ok="updateColumns"
           >
             <div>
-              <h5>Colonnes</h5>
+              <h5>{{ $t("tables.columns") }}</h5>
               <table
                 v-if="
                   selectedTable &&
@@ -190,9 +188,9 @@
                 class="table"
               >
                 <tr>
-                  <th>Colonne</th>
-                  <th>Variable associée</th>
-                  <th>Type</th>
+                  <th>{{ $t("common.column") }}</th>
+                  <th>{{ $t("common.associatedVariable") }}</th>
+                  <th>{{ $t("common.type") }}</th>
                 </tr>
                 <tr
                   v-for="(column, index) in selectedTable.columns"
@@ -213,54 +211,6 @@
                   </td>
                 </tr>
               </table>
-
-              <!--
-
-              <h5>Constantes</h5>
-
-              <table
-                v-if="selectedTable && selectedTable.constants"
-                class="table"
-              >
-                <tr>
-                  <th>Nom</th>
-                  <th>Valeur</th>
-                </tr>
-                <tr
-                  v-for="(constant, index) in selectedTable.constants"
-                  :key="index"
-                >
-                  <td>
-                    {{ constant.key }}
-                  </td>
-                  <td>
-                    {{ constant.value }}
-                  </td>
-                 
-                </tr>
-              </table>
-
-              <div class="row">
-                <div class="col-sm">
-                  <b-form-input
-                    v-model="constantName"
-                    placeholder="Entrez un nom de constante"
-                  ></b-form-input>
-                </div>
-
-                <div class="col-sm">
-                  <b-form-input
-                    v-model="constantValue"
-                    placeholder="Entrez une valeur"
-                  ></b-form-input>
-                </div>
-                <div>
-                  <button class="btn btn-primary" @click="addConstraint()">
-                    Ajouter
-                  </button>
-                </div>
-              </div>
-              -->
             </div>
           </b-modal>
         </div>
@@ -276,17 +226,13 @@ import appConfig from "../../../../app.config";
 import { ipcRenderer } from "electron";
 import { mapState } from "vuex";
 
-/**
- * File-manager component
- */
-
 export default {
   components: {
     Layout,
     PageHeader,
   },
   page: {
-    title: "Tableaux",
+    title: "Bmatch",
     meta: [{ name: "description", content: appConfig.description }],
   },
   computed: {
@@ -324,6 +270,10 @@ export default {
       tables: (state) => JSON.parse(JSON.stringify(state.project.base.tables)),
     }),
 
+    title() {
+      return this.$t("tables.title");
+    },
+
     fileManagerData() {
       let tables = [];
       if (!this.tables.tableA.empty) {
@@ -343,7 +293,7 @@ export default {
           href: "/",
         },
         {
-          text: "Projet",
+          text: this.$t("common.project"),
           href: "/",
         },
         {
@@ -353,26 +303,18 @@ export default {
       ],
       selectedType: "",
       columnsTypeOptions: [
-        { value: "string", text: "Texte" },
-        { value: "number", text: "Nombre" },
+        { value: "string", text: this.$t("common.text") },
+        { value: "number", text: this.$t("common.number") },
       ],
       selectedTable: null,
-      title: this.$t("tables.title"),
       currentPageA: 1,
       currentPageB: 1,
-
       perPage: 20,
-
       constantName: "",
       constantValue: "",
     };
   },
 
-  mounted() {
-    /* ipcRenderer.on("constant-added", (event, constant) => {
-      this.selectedTable.constants.push(constant);
-    });*/
-  },
   methods: {
     formatField(str) {
       return str.length > 40 ? str.substring(0, 40) + "..." : str;
@@ -383,7 +325,7 @@ export default {
         icon: require("@/assets/images/file-icons/txt.svg"),
         name: table.location,
         date: "21-May-18 1:12 PM",
-        size: table.data.length + " lignes",
+        size: table.data.length + " " + this.$t("common.lines"),
         users: [require("@/assets/images/users/avatar-5.jpg")],
       };
     },

@@ -1,0 +1,92 @@
+{
+	"menuitems": {
+		"btables": {
+			"text": "schilderijen"
+		},
+		"constraints": {
+			"text": "Beperkingen"
+		},
+		"matching": {
+			"text": "Bij elkaar passen"
+		}
+	},
+	"menu": {
+		"files": "Bestanden",
+		"newProject": "Nieuw project",
+		"importProject": "Een project importeren",
+		"save": "Opnemen",
+		"renameProject": "Hernoem het project",
+		"window": "Raam",
+		"quit": "Verlaten",
+		"languages": "Talen",
+		"fr": "Frans",
+		"en": "Engels",
+		"es": "Spaans",
+		"zh": "Chinese",
+		"ar": "Arabisch",
+		"ru": "Russisch",
+		"du": "Nederlands",
+		"pt": "Portugees",
+		"it": "Italiaans",
+		"de": "Duitse"
+	},
+	"app": {
+		"renameProject": "Hernoem het project",
+		"newProject": "Nieuw project",
+		"projectName": "naam van het project"
+	},
+	"common": {
+		"back": "Opbrengst",
+		"syntaxError": "Syntax error",
+		"project": "Project",
+		"name": "Naam",
+		"preview": "Overzicht",
+		"description": "Beschrijving",
+		"actions": "Acties",
+		"type": "Type",
+		"updatedAt": "Gewijzigd",
+		"size": "Snee",
+		"column": "Kolom",
+		"associatedVariable": "Bijbehorende variabele",
+		"lines": "lijnen",
+		"mentees": "Mentees",
+		"mentors": "mentoren",
+		"text": "Tekst",
+		"number": "Nummer",
+		"content": "Inhoud",
+		"save": "Opnemen",
+		"cancel": "annuleren"
+	},
+	"tables": {
+		"title": "Tabellen beheren",
+		"menteesTables": "Mentees tafel",
+		"mentorsTables": "Mentoren tafel",
+		"columns": "Kolommen",
+		"edit": "Kolomtype bewerken",
+		"noTablesMessage": "Er zijn momenteel geen tabellen geïmporteerd."
+	},
+	"constraints": {
+		"addConstraints": "Een beperking toevoegen",
+		"title": "Beperkingen",
+		"noConstraintsMessage": "Er is op dit moment geen noodzakelijke beperking in het project aanwezig.",
+		"wrongSyntaxMessage": "De syntaxis van uw beperking is niet correct, zorg ervoor dat u de aanbevolen syntaxis respecteert.",
+		"necessaryConstraints": "Noodzakelijke beperkingen",
+		"secondaryConstraints": "Secundaire beperkingen",
+		"weight": "Gewicht",
+		"constraintDetails": "Beperking details",
+		"descriptionPlaceholder": "Beschrijf de beperking om het lezen (of herlezen) te vergemakkelijken.",
+		"constraintType": "Type beperking",
+		"constraintWeight": "Stressgewicht",
+		"necessary": "Vereist",
+		"secondary": "Ondergeschikt"
+	},
+	"matching": {
+		"rejectedMentees": "Afgewezen mentees",
+		"rejectedMentors": "mentoren afgewezen",
+		"start": "Begin met matchen",
+		"pairsFound": "Binomialen gevonden",
+		"exportCSV": "Exporteren in CSV-indeling",
+		"noMatchingMessage": "Er is op dit moment geen matching gestart voor dit project.",
+		"title": "Bij elkaar passen"
+	}
+}

@@ -1,0 +1,92 @@
+{
+	"menuitems": {
+		"btables": {
+			"text": "Quadri"
+		},
+		"constraints": {
+			"text": "vincoli"
+		},
+		"matching": {
+			"text": "corrispondenza"
+		}
+	},
+	"menu": {
+		"files": "File",
+		"newProject": "Nuovo progetto",
+		"importProject": "Importa un progetto",
+		"save": "registrare",
+		"renameProject": "Rinominare il progetto",
+		"window": "Finestra",
+		"quit": "Lasciare",
+		"languages": "Le lingue",
+		"fr": "Francese",
+		"en": "inglese",
+		"es": "spagnolo",
+		"zh": "Cinese",
+		"ar": "arabo",
+		"ru": "russo",
+		"du": "olandese",
+		"pt": "portoghese",
+		"it": "italiano",
+		"de": "Tedesco"
+	},
+	"app": {
+		"renameProject": "Rinominare il progetto",
+		"newProject": "Nuovo progetto",
+		"projectName": "nome del progetto"
+	},
+	"common": {
+		"back": "Ritorno",
+		"syntaxError": "Errore di sintassi",
+		"project": "Progetto",
+		"name": "Nome",
+		"preview": "Panoramica",
+		"description": "Descrizione",
+		"actions": "Azioni",
+		"type": "Tipo",
+		"updatedAt": "Modificato",
+		"size": "Formato",
+		"column": "Colonna",
+		"associatedVariable": "Variabile associata",
+		"lines": "Linee",
+		"mentees": "Mentees",
+		"mentors": "Mentori",
+		"text": "Testo",
+		"number": "Numero",
+		"content": "Contenuti",
+		"save": "registrare",
+		"cancel": "per cancellare"
+	},
+	"tables": {
+		"title": "Gestisci tabelle",
+		"menteesTables": "Tabella Mentees",
+		"mentorsTables": "Tavolo Mentori",
+		"columns": "colonne",
+		"edit": "Modifica tipo di colonna",
+		"noTablesMessage": "Nessuna tabella è stata importata per il momento."
+	},
+	"constraints": {
+		"addConstraints": "Aggiungi un vincolo",
+		"title": "vincoli",
+		"noConstraintsMessage": "Nessun vincolo necessario è presente nel progetto per il momento.",
+		"wrongSyntaxMessage": "La sintassi del tuo vincolo non è corretta, assicurati di rispettare la sintassi consigliata.",
+		"necessaryConstraints": "Vincoli necessari",
+		"secondaryConstraints": "Vincoli secondari",
+		"weight": "Peso",
+		"constraintDetails": "Dettagli vincolo",
+		"descriptionPlaceholder": "Descrivere il vincolo per facilitarne la lettura (o la rilettura).",
+		"constraintType": "Tipo di vincolo",
+		"constraintWeight": "Peso dello stress",
+		"necessary": "Necessario",
+		"secondary": "Secondario"
+	},
+	"matching": {
+		"rejectedMentees": "Allievi rifiutati",
+		"rejectedMentors": "Mentori rifiutati",
+		"start": "Inizia ad abbinare",
+		"pairsFound": "Binomi trovati",
+		"exportCSV": "Esporta in formato CSV",
+		"noMatchingMessage": "Per il momento non è stata avviata alcuna corrispondenza per questo progetto.",
+		"title": "corrispondenza"
+	}
+}

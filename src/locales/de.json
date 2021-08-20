@@ -1,0 +1,92 @@
+{
+	"menuitems": {
+		"btables": {
+			"text": "Gemälde"
+		},
+		"constraints": {
+			"text": "Einschränkungen"
+		},
+		"matching": {
+			"text": "Passende"
+		}
+	},
+	"menu": {
+		"files": "Dateien",
+		"newProject": "Neues Projekt",
+		"importProject": "Importieren eines Projekts",
+		"save": "Registrieren",
+		"renameProject": "Benennen Sie das Projekt um",
+		"window": "Fenster",
+		"quit": "Verlassen",
+		"languages": "Sprachen",
+		"fr": "Französisch",
+		"en": "Englisch",
+		"es": "Spanisch",
+		"zh": "Chinesisch",
+		"ar": "Arabisch",
+		"ru": "Russisch",
+		"du": "Niederländisch",
+		"pt": "Portugiesisch",
+		"it": "Italienisch",
+		"de": "Deutsche"
+	},
+	"app": {
+		"renameProject": "Benennen Sie das Projekt um",
+		"newProject": "Neues Projekt",
+		"projectName": "Name des Projekts"
+	},
+	"common": {
+		"back": "Zurückkehren",
+		"syntaxError": "Syntax-Fehler",
+		"project": "Projekt",
+		"name": "Familienname, Nachname",
+		"preview": "Überblick",
+		"description": "Beschreibung",
+		"actions": "Aktionen",
+		"type": "Typ",
+		"updatedAt": "Geändert",
+		"size": "Schneiden",
+		"column": "Spalte",
+		"associatedVariable": "Zugehörige Variable",
+		"lines": "Linien",
+		"mentees": "Mentees",
+		"mentors": "Mentoren",
+		"text": "Text",
+		"number": "Nummer",
+		"content": "Inhalt",
+		"save": "Registrieren",
+		"cancel": "abbrechen"
+	},
+	"tables": {
+		"title": "Tabellen verwalten",
+		"menteesTables": "Mentees-Tisch",
+		"mentorsTables": "Mentorentisch",
+		"columns": "Säulen",
+		"edit": "Spaltentyp bearbeiten",
+		"noTablesMessage": "Zur Zeit wurden keine Tabellen importiert."
+	},
+	"constraints": {
+		"addConstraints": "Einschränkung hinzufügen",
+		"title": "Einschränkungen",
+		"noConstraintsMessage": "Im Moment ist im Projekt keine notwendige Einschränkung vorhanden.",
+		"wrongSyntaxMessage": "Die Syntax Ihrer Einschränkung ist nicht korrekt. Beachten Sie die empfohlene Syntax.",
+		"necessaryConstraints": "Notwendige Einschränkungen",
+		"secondaryConstraints": "Sekundäre Einschränkungen",
+		"weight": "Gewicht",
+		"constraintDetails": "Einschränkungsdetails",
+		"descriptionPlaceholder": "Beschreiben Sie die Einschränkung, um ihr Lesen (oder erneutes Lesen) zu erleichtern.",
+		"constraintType": "Art der Einschränkung",
+		"constraintWeight": "Stressgewicht",
+		"necessary": "Notwendig",
+		"secondary": "Sekundär"
+	},
+	"matching": {
+		"rejectedMentees": "Abgelehnte Mentees",
+		"rejectedMentors": "Mentoren abgelehnt",
+		"start": "Abgleich starten",
+		"pairsFound": "Binomiale gefunden",
+		"exportCSV": "Export im CSV-Format",
+		"noMatchingMessage": "Für dieses Projekt wurde im Moment kein Matching gestartet.",
+		"title": "Passende"
+	}
+}

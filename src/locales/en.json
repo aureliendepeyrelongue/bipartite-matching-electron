@@ -4,21 +4,89 @@
       "text": "Tables"
     },
     "constraints": {
-      "text": "Contraintes"
+      "text": "Constraints"
     },
     "matching": {
       "text": "Matching"
     }
   },
+  "menu": {
+    "files": "Files",
+    "newProject": "New project",
+    "importProject": "Import a project",
+    "save": "To register",
+    "renameProject": "Rename the project",
+    "window": "Window",
+    "quit": "Leave",
+    "languages": "Languages",
+    "fr": "French",
+    "en": "English",
+    "es": "Spanish",
+    "zh": "Chinese",
+    "ar": "Arab",
+    "ru": "Russian",
+    "du": "Dutch",
+    "pt": "Portuguese",
+    "it": "Italian",
+    "de": "German"
+  },
+  "app": {
+    "renameProject": "Rename the project",
+    "newProject": "New project",
+    "projectName": "name of the project"
+  },
+  "common": {
+    "back": "Return",
+    "syntaxError": "Syntax error",
+    "project": "Project",
+    "name": "Name",
+    "preview": "Overview",
+    "description": "Description",
+    "actions": "Actions",
+    "type": "Type",
+    "updatedAt": "Modified",
+    "size": "Size",
+    "column": "Column",
+    "associatedVariable": "Associated variable",
+    "lines": "lines",
+    "mentees": "Mentees",
+    "mentors": "Mentors",
+    "text": "Text",
+    "number": "Number",
+    "content": "Contents",
+    "save": "Register",
+    "cancel": "Cancel"
+  },
   "tables": {
-    "title": "Gérer les tableaux",
-    "menteesTables": "Tableau mentees",
-    "mentorsTables": "Tableau mentors"
+    "title": "Manage tables",
+    "menteesTables": "Mentees table",
+    "mentorsTables": "Mentors table",
+    "columns": "Columns",
+    "edit": "Edit column type",
+    "noTablesMessage": "No tables have been imported for the moment."
   },
   "constraints": {
-    "title": "Contraintes"
+    "addConstraints": "Add a constraint",
+    "title": "Constraints",
+    "noConstraintsMessage": "No necessary constraint is present in the project for the moment.",
+    "wrongSyntaxMessage": "The syntax of your constraint is not correct, make sure to respect the recommended syntax.",
+    "necessaryConstraints": "Necessary constraints",
+    "secondaryConstraints": "Secondary constraints",
+    "weight": "Weight",
+    "constraintDetails": "Constraint details",
+    "descriptionPlaceholder": "Describe the constraint in order to facilitate its reading (or rereading).",
+    "constraintType": "Type of constraint",
+    "constraintWeight": "Constraint weight",
+    "necessary": "Necessary",
+    "secondary": "Secondary"
   },
   "matching": {
+    "rejectedMentees": "Rejected mentees",
+    "rejectedMentors": "Mentors rejected",
+    "start": "Start matching",
+    "pairsFound": "Binomials found",
+    "exportCSV": "Export in CSV format",
+    "noMatchingMessage": "No matching has been launched for this project for the moment.",
     "title": "Matching"
   }
 }

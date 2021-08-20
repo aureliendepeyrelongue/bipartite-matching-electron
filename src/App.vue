@@ -4,7 +4,9 @@
     <b-modal
       id="new-project-modal"
       scrollable
-      :title="udpateProjectNameOnly ? 'Renommer le projet' : 'Nouveau projet'"
+      :title="
+        udpateProjectNameOnly ? $t('app.renameProject') : $t('app.newProject')
+      "
       title-tag="h5"
       size="md"
       @ok="createNewProject"
@@ -12,7 +14,7 @@
       <b-form>
         <b-form-group
           id="input-group-1"
-          label="Nom du projet"
+          :label="$t('app.projectName')"
           label-for="input-1"
         >
           <b-form-input
@@ -47,9 +49,15 @@ export default {
       this.$bvModal.show("new-project-modal");
     });
 
-    this.$i18n.locale = "en";
+    ipcRenderer.on("change-lang", (event, lang) => {
+      console.log("ok");
+      console.log(lang);
+      this.$i18n.locale = lang;
+      ipcRenderer.send("set-menu", this.getTranslations());
+    });
 
     ipcRenderer.send("app-loaded");
+    ipcRenderer.send("set-menu", this.getTranslations());
   },
 
   methods: {
@@ -58,8 +66,29 @@ export default {
         ipcRenderer.send("project-renamed", this.projectName);
         this.udpateProjectNameOnly = false;
       } else ipcRenderer.send("project-created", this.projectName);
-
       this.projectName = "";
+    },
+    getTranslations() {
+      return {
+        files: this.$t("menu.files"),
+        newProject: this.$t("menu.newProject"),
+        importProject: this.$t("menu.importProject"),
+        save: this.$t("menu.save"),
+        renameProject: this.$t("menu.renameProject"),
+        window: this.$t("menu.window"),
+        quit: this.$t("menu.quit"),
+        languages: this.$t("menu.languages"),
+        fr: this.$t("menu.fr"),
+        en: this.$t("menu.en"),
+        es: this.$t("menu.es"),
+        zh: this.$t("menu.es"),
+        ar: this.$t("menu.ar"),
+        ru: this.$t("menu.ru"),
+        du: this.$t("menu.du"),
+        pt: this.$t("menu.pt"),
+        it: this.$t("menu.it"),
+        de: this.$t("menu.de"),
+      };
     },
   },
 };

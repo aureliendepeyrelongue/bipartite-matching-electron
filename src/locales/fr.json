@@ -10,15 +10,83 @@
       "text": "Matching"
     }
   },
+  "menu": {
+    "files": "Fichiers",
+    "newProject": "Nouveau projet",
+    "importProject": "Importer un projet",
+    "save": "Enregistrer",
+    "renameProject": "Renommer le projet",
+    "window": "Fenêtre",
+    "quit": "Quitter",
+    "languages": "Langues",
+    "fr": "Français",
+    "en": "Anglais",
+    "es": "Espagnol",
+    "zh": "Chinese",
+    "ar": "Arabe",
+    "ru": "Russe",
+    "du": "Néerlandais",
+    "pt": "Portugais",
+    "it": "Italien",
+    "de": "Allemand"
+  },
+  "app": {
+    "renameProject": "Renommer le projet",
+    "newProject": "Nouveau projet",
+    "projectName": "Nom du projet"
+  },
+  "common": {
+    "back": "Retour",
+    "syntaxError": "Erreur de syntaxe",
+    "project": "Projet",
+    "name": "Nom",
+    "preview": "Aperçu",
+    "description": "Description",
+    "actions": "Actions",
+    "type": "Type",
+    "updatedAt": "Modifié le",
+    "size": "Taille",
+    "column": "Colonne",
+    "associatedVariable": "Variable associée",
+    "lines": "lignes",
+    "mentees": "Mentees",
+    "mentors": "Mentors",
+    "text": "Texte",
+    "number": "Nombre",
+    "content": "Contenu",
+    "save": "Enregistrer",
+    "cancel": "Annuler"
+  },
   "tables": {
     "title": "Gérer les tableaux",
     "menteesTables": "Tableau mentees",
-    "mentorsTables": "Tableau mentors"
+    "mentorsTables": "Tableau mentors",
+    "columns": "Colonnes",
+    "edit": "Éditer le type des colonnes",
+    "noTablesMessage": "Aucun tableau n'a été importé pour le momment."
   },
   "constraints": {
-    "title": "Contraintes"
+    "addConstraints": "Ajouter une contrainte",
+    "title": "Contraintes",
+    "noConstraintsMessage": "Aucune contrainte nécessaire n'est présente dans le projet pour le moment.",
+    "wrongSyntaxMessage": "La syntaxe de votre contrainte n'est pas correcte, assurez-vous de respecter la syntaxe préconnisée.",
+    "necessaryConstraints": "Contraintes nécessaires",
+    "secondaryConstraints": "Contraintes secondaires",
+    "weight": "Poids",
+    "constraintDetails": "Détails de la contrainte",
+    "descriptionPlaceholder": "Décrivez la contrainte afin de faciliter sa lecture (ou relecture).",
+    "constraintType": "Type de contrainte",
+    "constraintWeight": "Poids de la contrainte",
+    "necessary": "Nécessaire",
+    "secondary": "Secondaire"
   },
   "matching": {
+    "rejectedMentees": "Mentees rejetés",
+    "rejectedMentors": "Mentors rejetés",
+    "start": "Lancer le matching",
+    "pairsFound": "Binômes trouvés",
+    "exportCSV": "Exporter au format CSV",
+    "noMatchingMessage": "Aucun matching n'a été lancé pour ce projet pour le moment.",
     "title": "Matching"
   }
 }

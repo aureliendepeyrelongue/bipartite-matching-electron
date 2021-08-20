@@ -24,19 +24,19 @@ const sendProjectToView = (win) => {
   win.webContents.send("project-updated", pm.base);
 };
 
-const createMenu = (win) => {
+const createMenu = (win, translations) => {
   const template = [
     {
-      label: "Fichiers",
+      label: translations["files"],
       submenu: [
         {
-          label: "Nouveau projet",
+          label: translations["newProject"],
           click() {
             win.webContents.send("create-new-project", pm.base);
           },
         },
         {
-          label: "Importer un projet",
+          label: translations["importProject"],
           async click() {
             const result = await dialog.showOpenDialog({
               properties: ["openFile"],
@@ -49,7 +49,7 @@ const createMenu = (win) => {
         },
 
         {
-          label: "Enregistrer",
+          label: translations["save"],
           async click() {
             try {
               const result = await dialog.showOpenDialog({
@@ -68,7 +68,7 @@ const createMenu = (win) => {
           },
         },
         {
-          label: "Renommer le projet",
+          label: translations["renameProject"],
           click() {
             win.webContents.send("rename-project");
           },
@@ -76,17 +76,72 @@ const createMenu = (win) => {
       ],
     },
     {
-      label: "Fenêtre",
-      submenu: [{ label: "Quitter" }],
+      label: translations["window"],
+      submenu: [{ label: translations["quit"] }],
     },
     {
-      label: "Langues",
+      label: translations["languages"],
       submenu: [
-        { label: "Français" },
-        { label: "English" },
-        { label: "Espanol" },
-        { label: "Chinese" },
-        { label: "Arabic" },
+        {
+          label: translations["fr"],
+          click() {
+            win.webContents.send("change-lang", "fr");
+          },
+        },
+        {
+          label: translations["en"],
+          click() {
+            win.webContents.send("change-lang", "en");
+          },
+        },
+        {
+          label: translations["es"],
+          click() {
+            win.webContents.send("change-lang", "es");
+          },
+        },
+        {
+          label: translations["zh"],
+          click() {
+            win.webContents.send("change-lang", "zh");
+          },
+        },
+        {
+          label: translations["ar"],
+          click() {
+            win.webContents.send("change-lang", "ar");
+          },
+        },
+        {
+          label: translations["ru"],
+          click() {
+            win.webContents.send("change-lang", "ru");
+          },
+        },
+        {
+          label: translations["du"],
+          click() {
+            win.webContents.send("change-lang", "du");
+          },
+        },
+        {
+          label: translations["pt"],
+          click() {
+            win.webContents.send("change-lang", "pt");
+          },
+        },
+        {
+          label: translations["it"],
+          click() {
+            win.webContents.send("change-lang", "it");
+          },
+        },
+        {
+          label: translations["de"],
+          click() {
+            win.webContents.send("change-lang", "de");
+          },
+        },
       ],
     },
   ];
@@ -108,7 +163,6 @@ async function createWindow() {
   });
 
   eventManager(win);
-  createMenu(win);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -158,6 +212,10 @@ const eventManager = (win) => {
 
   ipcMain.on("app-loaded", (event) => {
     sendProjectToView(win);
+  });
+  ipcMain.on("set-menu", (event, translations) => {
+    console.log(translations);
+    createMenu(win, translations);
   });
   ipcMain.on("project-renamed", (event, projectName) => {
     pm.setProjectName(projectName);

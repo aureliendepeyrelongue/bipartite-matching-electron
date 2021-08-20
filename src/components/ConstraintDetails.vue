@@ -1,35 +1,37 @@
 <template>
   <div>
     <div class="col-md-12 mt-2">
-      <h4 class="mb-2">Détails de la contrainte "{{ form.name }}"</h4>
-      <label for="">Nom</label>
+      <h4 class="mb-2">
+        {{ $t("constraints.constraintDetails") }} "{{ form.name }}"
+      </h4>
+      <label for="">{{ $t("common.name") }}</label>
       <p>
         {{ form.name }}
       </p>
-      <label for="">Type</label>
+      <label for="">{{ $t("common.type") }}</label>
       <p>
         {{ constraintsType[form.type] }}
       </p>
       <div v-if="form.type === 'secondary'">
-        <label for="">Poids</label>
+        <label for="">{{ $t("constraints.weight") }}</label>
         <p>
           {{ constraintsType[form.type] }}
         </p>
       </div>
-      <label for="">Contenu</label>
+      <label for="">{{ $t("common.content") }}</label>
       <MonacoEditor
         ref="editor"
         :smallSize="form.content && form.content.length < 100"
         :content="form.content"
         :createOptions="{ readOnly: true }"
       />
-      <label for="">Déscription</label>
+      <label for="">{{ $t("common.description") }}</label>
       <p>
         {{ form.description ? form.description : "--" }}
       </p>
       <div class="text-right mt-4 mb-2">
-        <b-button type="reset" variant="info" @click="$emit('on-return')"
-          >Retour</b-button
+        <b-button type="reset" variant="info" @click="$emit('on-return')">
+          {{ $t("common.back") }}</b-button
         >
       </div>
     </div>
