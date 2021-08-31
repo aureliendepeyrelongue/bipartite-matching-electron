@@ -140,9 +140,7 @@ class ProjectManager {
 
   deleteConstraint(id) {
     const toRemove = this.base.constraints.find((c) => c.id === id);
-    console.log(toRemove);
     const index = this.base.constraints.indexOf(toRemove);
-    console.log(index);
     if (index > -1) this.base.constraints.splice(index, 1);
   }
 
@@ -166,7 +164,6 @@ class ProjectManager {
       this.base.tables[`table${tableType}`].constants.push(constant);
       return constant;
     } else {
-      console.log(tableType);
       throw new Error("Unknown table type", tableType);
     }
   }

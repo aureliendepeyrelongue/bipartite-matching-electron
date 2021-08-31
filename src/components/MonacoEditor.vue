@@ -53,25 +53,28 @@ export default {
               /"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/,
               "string-token",
             ],
-            [/-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/, "number-token"],
+            [/ -?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/, "number-token"],
             ["not", "not-token"],
             ["and", "and-token"],
+            ["or", "or-token"],
             ["or", "or-token"],
           ],
         },
       });
+      const mainColor = "4f7de1";
+      const secondaryColor = "555555";
       monaco.editor.defineTheme("mentoringTheme", {
         base: "vs",
         inherit: false,
         rules: [
-          { token: "mentee-token", foreground: "3BAFDA", fontStyle: "bold" },
-          { token: "mentor-token", foreground: "3BAFDA", fontStyle: "bold" },
+          { token: "mentee-token", foreground: mainColor, fontStyle: "bold" },
+          { token: "mentor-token", foreground: mainColor, fontStyle: "bold" },
           { token: "var-token", fontStyle: "italic" },
           { token: "string-token", foreground: "F1556C", fontStyle: "italic" },
           { token: "number-token", foreground: "F1556C" },
-          { token: "or-token", foreground: "F1556C", fontStyle: "bold" },
-          { token: "and-token", foreground: "F1556C", fontStyle: "bold" },
-          { token: "not-token", foreground: "222222", fontStyle: "bold" },
+          { token: "or-token", foreground: secondaryColor, fontStyle: "bold" },
+          { token: "and-token", foreground: secondaryColor, fontStyle: "bold" },
+          { token: "not-token", foreground: secondaryColor, fontStyle: "bold" },
         ],
       });
       this.editor = monaco.editor.create(this.$refs.editor, {

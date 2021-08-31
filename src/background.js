@@ -85,61 +85,81 @@ const createMenu = (win, translations) => {
         {
           label: translations["fr"],
           click() {
-            win.webContents.send("change-lang", "fr");
+            const lang = "fr";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["en"],
           click() {
-            win.webContents.send("change-lang", "en");
+            const lang = "en";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["es"],
           click() {
-            win.webContents.send("change-lang", "es");
+            const lang = "es";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["zh"],
           click() {
-            win.webContents.send("change-lang", "zh");
+            const lang = "zh";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["ar"],
           click() {
-            win.webContents.send("change-lang", "ar");
+            const lang = "ar";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["ru"],
           click() {
-            win.webContents.send("change-lang", "ru");
+            const lang = "ru";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["du"],
           click() {
-            win.webContents.send("change-lang", "du");
+            const lang = "du";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["pt"],
           click() {
-            win.webContents.send("change-lang", "pt");
+            const lang = "pt";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["it"],
           click() {
+            const lang = "it";
             win.webContents.send("change-lang", "it");
+            updateUserConfig("lang", lang);
           },
         },
         {
           label: translations["de"],
           click() {
-            win.webContents.send("change-lang", "de");
+            const lang = "de";
+            win.webContents.send("change-lang", lang);
+            updateUserConfig("lang", lang);
           },
         },
       ],
@@ -148,6 +168,22 @@ const createMenu = (win, translations) => {
 
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+};
+
+const userConfigPath = `${app.getPath("userData")}/config.json`;
+
+let userConfig;
+try {
+  const file = fs.readFileSync(userConfigPath, "utf8");
+  userConfig = JSON.parse(file);
+} catch (err) {
+  userConfig = {};
+}
+
+const updateUserConfig = (key, value) => {
+  const config = userConfig || {};
+  config[key] = value;
+  fs.writeFileSync(userConfigPath, JSON.stringify(config));
 };
 async function createWindow() {
   // Create the browser window.
@@ -173,6 +209,7 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+  win.webContents.send("change-lang", userConfig.lang || "en");
 }
 
 // Quit when all windows are closed.
@@ -214,7 +251,6 @@ const eventManager = (win) => {
     sendProjectToView(win);
   });
   ipcMain.on("set-menu", (event, translations) => {
-    console.log(translations);
     createMenu(win, translations);
   });
   ipcMain.on("project-renamed", (event, projectName) => {

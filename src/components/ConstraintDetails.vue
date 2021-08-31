@@ -54,12 +54,16 @@ export default {
     },
   },
   data() {
-    return {
-      constraintsType: {
-        necessary: "Nécessaire",
-        secondary: "Secondaire",
-      },
-    };
+    return {};
+  },
+
+  computed: {
+    constraintsType() {
+      return {
+        necessary: this.$t("constraints.necessary"),
+        secondary: this.$t("constraints.secondary"),
+      };
+    },
   },
 
   watch: {

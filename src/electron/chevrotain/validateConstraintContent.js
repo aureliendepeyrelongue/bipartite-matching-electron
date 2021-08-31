@@ -42,19 +42,27 @@ module.exports = function(nameSpaceA, nameSpaceB, constraintContent) {
     const parser = new ConstraintParser();
     parser.set(newConstraint.tokens, {}, {});
     const res = parser.getResult();
-    if (
-      res === undefined ||
-      baseTokens
-        .map((t) => t.image)
-        .join("")
-        .split(" ")
-        .join("").length !== constraintContent.split(" ").join("").length
-    )
+
+    const str1 = baseTokens
+      .map((t) => t.image)
+      .join("")
+      .split(" ")
+      .join("");
+    const str2 = constraintContent
+      .split("\r")
+      .join("")
+      .split("\n")
+      .join("")
+      .split(" ")
+      .join("");
+
+    if (res === undefined || str1.length !== str2.length)
       return { message: "validation-failed" };
     else {
       return { message: "validation-success" };
     }
   } catch (err) {
+    console.log(err);
     return err;
   }
 };

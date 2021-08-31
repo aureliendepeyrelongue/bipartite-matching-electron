@@ -185,25 +185,9 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          text: "Bmatch",
-          href: "/",
-        },
-        {
-          text: this.$t("common.project"),
-          href: "/",
-        },
-        {
-          text: this.$t("matching.title"),
-          active: true,
-        },
-      ],
       currentPagePairs: 1,
       currentPageA: 1,
       currentPageB: 1,
-
-      title: this.$t("matching.title"),
 
       perPage: 10,
     };
@@ -269,11 +253,31 @@ export default {
       });
       return newTable;
     },
+
+    title() {
+      return this.$t("matching.title");
+    },
+
+    items() {
+      return [
+        {
+          text: "Bmatch",
+          href: "/",
+        },
+        {
+          text: this.$t("common.project"),
+          href: "/",
+        },
+        {
+          text: this.$t("matching.title"),
+          active: true,
+        },
+      ];
+    },
   },
 
   methods: {
     exportCSV() {
-      console.log("export csv trial");
       ipcRenderer.send("csv-export");
     },
     formatField(str) {

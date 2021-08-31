@@ -235,6 +235,18 @@ export default {
     title: "Bmatch",
     meta: [{ name: "description", content: appConfig.description }],
   },
+
+  data() {
+    return {
+      selectedType: "",
+      selectedTable: null,
+      currentPageA: 1,
+      currentPageB: 1,
+      perPage: 20,
+      constantName: "",
+      constantValue: "",
+    };
+  },
   computed: {
     rowsA() {
       return this.tables && this.tables.tableA
@@ -284,10 +296,8 @@ export default {
       }
       return tables;
     },
-  },
-  data() {
-    return {
-      items: [
+    items() {
+      return [
         {
           text: "Bmatch",
           href: "/",
@@ -300,19 +310,14 @@ export default {
           text: this.$t("tables.title"),
           active: true,
         },
-      ],
-      selectedType: "",
-      columnsTypeOptions: [
+      ];
+    },
+    columnsTypeOptions() {
+      return [
         { value: "string", text: this.$t("common.text") },
         { value: "number", text: this.$t("common.number") },
-      ],
-      selectedTable: null,
-      currentPageA: 1,
-      currentPageB: 1,
-      perPage: 20,
-      constantName: "",
-      constantValue: "",
-    };
+      ];
+    },
   },
 
   methods: {

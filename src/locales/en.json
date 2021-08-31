@@ -14,7 +14,7 @@
     "files": "Files",
     "newProject": "New project",
     "importProject": "Import a project",
-    "save": "To register",
+    "save": "Save",
     "renameProject": "Rename the project",
     "window": "Window",
     "quit": "Leave",
@@ -54,7 +54,7 @@
     "text": "Text",
     "number": "Number",
     "content": "Contents",
-    "save": "Register",
+    "save": "Save",
     "cancel": "Cancel"
   },
   "tables": {

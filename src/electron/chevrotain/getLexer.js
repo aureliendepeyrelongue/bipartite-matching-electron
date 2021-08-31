@@ -101,6 +101,7 @@ module.exports = (partANamespace, partBNamespace) => {
 
   var allTokens = [
     WhiteSpace,
+    NextLine,
     NumberLiteral,
     StringLiteral,
     LPLitteral,
@@ -108,7 +109,6 @@ module.exports = (partANamespace, partBNamespace) => {
     Or,
     And,
     Not,
-    NextLine,
     PartAVar,
     PartBVar,
     Plus,

@@ -103,9 +103,9 @@ const NextLine = createToken({
 
 var allTokens = [
   WhiteSpace,
+  NextLine,
   NumberLiteral,
   StringLiteral,
-  NextLine,
   Or,
   And,
   Not,

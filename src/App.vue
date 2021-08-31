@@ -50,8 +50,6 @@ export default {
     });
 
     ipcRenderer.on("change-lang", (event, lang) => {
-      console.log("ok");
-      console.log(lang);
       this.$i18n.locale = lang;
       ipcRenderer.send("set-menu", this.getTranslations());
     });

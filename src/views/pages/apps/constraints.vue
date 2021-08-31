@@ -304,6 +304,23 @@ export default {
     secondaryConstraints() {
       return this.constraintsFormatted.filter((c) => c.type === "secondary");
     },
+
+    items() {
+      return [
+        {
+          text: "Bmatch",
+          href: "/",
+        },
+        {
+          text: this.$t("common.project"),
+          href: "/",
+        },
+        {
+          text: this.$t("constraints.title"),
+          active: true,
+        },
+      ];
+    },
   },
   data() {
     return {
@@ -317,20 +334,6 @@ export default {
       },
       askingValidation: false,
       sendValidation: true,
-      items: [
-        {
-          text: "Bmatch",
-          href: "/",
-        },
-        {
-          text: this.$t("common.project"),
-          href: "/",
-        },
-        {
-          text: this.$t("constraints.title"),
-          active: true,
-        },
-      ],
     };
   },
   mounted() {
