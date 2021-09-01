@@ -61,7 +61,7 @@ export default {
           ],
         },
       });
-      const mainColor = "4f7de1";
+      const mainColor = "4fb0e1";
       const secondaryColor = "555555";
       monaco.editor.defineTheme("mentoringTheme", {
         base: "vs",

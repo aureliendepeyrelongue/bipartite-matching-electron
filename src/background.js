@@ -75,10 +75,7 @@ const createMenu = (win, translations) => {
         },
       ],
     },
-    {
-      label: translations["window"],
-      submenu: [{ label: translations["quit"] }],
-    },
+
     {
       label: translations["languages"],
       submenu: [
