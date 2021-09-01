@@ -35,9 +35,7 @@
                   <tr>
                     <th class="font-weight-medium">{{ $t("common.name") }}</th>
                     <th class="font-weight-medium">{{ $t("common.type") }}</th>
-                    <th class="font-weight-medium">
-                      {{ $t("common.updatedAt") }}
-                    </th>
+
                     <th class="font-weight-medium">{{ $t("common.size") }}</th>
                     <th
                       class="font-weight-medium text-center"
@@ -71,28 +69,15 @@
                           : $t("common.mentors")
                       }}</a>
                     </td>
-                    <td class="text-muted font-13">{{ tableData.date }}</td>
                     <td>{{ tableData.size }}</td>
-                    <td>
-                      <ul class="list-inline table-action m-0">
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript:void(0);"
-                            class="action-icon px-1"
-                            @click="showTableModal(tableData.type)"
-                          >
-                            <i class="mdi mdi-pencil"></i
-                          ></a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript:void(0);"
-                            class="action-icon px-1"
-                          >
-                            <i class="mdi mdi-delete"></i
-                          ></a>
-                        </li>
-                      </ul>
+                    <td class="text-center">
+                      <a
+                        href="javascript:void(0);"
+                        class="action-icon px-1"
+                        @click="showTableModal(tableData.type)"
+                      >
+                        <i class="mdi mdi-pencil"></i
+                      ></a>
                     </td>
                   </tr>
                 </tbody>
@@ -329,7 +314,6 @@ export default {
         type: tableType,
         icon: require("@/assets/images/file-icons/txt.svg"),
         name: table.location,
-        date: "21-May-18 1:12 PM",
         size: table.data.length + " " + this.$t("common.lines"),
         users: [require("@/assets/images/users/avatar-5.jpg")],
       };

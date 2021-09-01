@@ -331,50 +331,55 @@ const eventManager = (win) => {
         properties: ["openDirectory"],
       });
 
-      const pairsParser = new Parser({
-        fields: pm.base.matchingResult.pairsColumns,
-        delimiter: ";",
-      });
-      const pairsCSV = pairsParser.parse(pm.base.matchingResult.pairs);
+      if (pm.base.matchingResult.pairs.length) {
+        const pairsParser = new Parser({
+          fields: pm.base.matchingResult.pairsColumns,
+          delimiter: ";",
+        });
+        const pairsCSV = pairsParser.parse(pm.base.matchingResult.pairs);
 
-      let filePathPairs = path.join(
-        result.filePaths[0],
-        `${constantCase(removeAccents(pm.base.name)).toLowerCase()}_pairs.csv`
-      );
+        let filePathPairs = path.join(
+          result.filePaths[0],
+          `${constantCase(removeAccents(pm.base.name)).toLowerCase()}_pairs.csv`
+        );
+        fs.writeFileSync(filePathPairs, pairsCSV);
+      }
 
-      const rejectedAParser = new Parser({
-        fields: pm.base.tables.tableA.columns.map((c) => c.origin),
-        delimiter: ";",
-      });
-      const rejectedACSV = rejectedAParser.parse(
-        pm.base.matchingResult.rejectedA
-      );
+      if (pm.base.matchingResult.rejectedA.length) {
+        const rejectedAParser = new Parser({
+          fields: pm.base.tables.tableA.columns.map((c) => c.origin),
+          delimiter: ";",
+        });
+        const rejectedACSV = rejectedAParser.parse(
+          pm.base.matchingResult.rejectedA
+        );
 
-      let filePathRejectedA = path.join(
-        result.filePaths[0],
-        `${constantCase(
-          removeAccents(pm.base.name)
-        ).toLowerCase()}_rejected_mentees.csv`
-      );
+        let filePathRejectedA = path.join(
+          result.filePaths[0],
+          `${constantCase(
+            removeAccents(pm.base.name)
+          ).toLowerCase()}_rejected_mentees.csv`
+        );
+        fs.writeFileSync(filePathRejectedA, rejectedACSV);
+      }
 
-      const rejectedBParser = new Parser({
-        fields: pm.base.tables.tableB.columns.map((c) => c.origin),
-        delimiter: ";",
-      });
-      const rejectedBCSV = rejectedBParser.parse(
-        pm.base.matchingResult.rejectedB
-      );
+      if (pm.base.matchingResult.rejectedB.length) {
+        const rejectedBParser = new Parser({
+          fields: pm.base.tables.tableB.columns.map((c) => c.origin),
+          delimiter: ";",
+        });
+        const rejectedBCSV = rejectedBParser.parse(
+          pm.base.matchingResult.rejectedB
+        );
 
-      let filePathRejectedB = path.join(
-        result.filePaths[0],
-        `${constantCase(
-          removeAccents(pm.base.name)
-        ).toLowerCase()}_rejected_mentors.csv`
-      );
-
-      fs.writeFileSync(filePathPairs, pairsCSV);
-      fs.writeFileSync(filePathRejectedA, rejectedACSV);
-      fs.writeFileSync(filePathRejectedB, rejectedBCSV);
+        let filePathRejectedB = path.join(
+          result.filePaths[0],
+          `${constantCase(
+            removeAccents(pm.base.name)
+          ).toLowerCase()}_rejected_mentors.csv`
+        );
+        fs.writeFileSync(filePathRejectedB, rejectedBCSV);
+      }
 
       sendProjectToView(win);
     } catch (err) {

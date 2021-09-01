@@ -34,7 +34,7 @@
                       matchingResult.rejectedB.length))
                 )
               "
-              class="mt-2"
+              class="mt-3"
             >
               <b-alert variant="info" show>
                 {{ $t("matching.noMatchingMessage") }}

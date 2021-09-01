@@ -8,6 +8,12 @@
     },
     "matching": {
       "text": "Matching"
+    },
+    "doc": {
+      "text": "Documentation"
+    },
+    "docpage": {
+      "text": "Notice"
     }
   },
   "menu": {
@@ -88,5 +94,35 @@
     "exportCSV": "Exporter au format CSV",
     "noMatchingMessage": "Aucun matching n'a été lancé pour ce projet pour le moment.",
     "title": "Matching"
+  },
+  "doc": {
+    "documentation": "Documentation",
+    "title": "Notice d'utilisation",
+    "title1": "Fonctionnement du logiciel",
+    "p1": "Ce logiciel permet de faire du matching biparti sur deux tableaux de données, l'objectif est de pouvoir obtenir des binômes (dont chaque membre provient d'un tableau différent) et qui respectent certaines contraintes. Le but est également de pouvoir orienter facilement le matching à l'aide d'un DSL (Domain Specific Language). Le DSL présent dans ce logiciel permet d'écrire des contraintes qui devront être satisfaites pour qu'un binôme soit considéré comme viable.",
+    "p2": "Ainsi le but ultime de ce logiciel est de permettre de se focaliser sur la politique de matching et de lancer un algorithme de matching qui respectera cette politique. Une fois lancé le matching se fait en quelques secondes là où un matching  manuel se ferait en plusieures heures.",
+    "title2": "Préparer les données",
+    "p3": "Chaque tableau mentee et mentor doit être importé au format CSV et avec pour séparateur un point-virgule. Chaque tableau doit être encodé au format UTF-8. Si vous rencontrez des problèmes pour l'encodage de vos tableaux de données depuis Excel, voici la marche à suivre.",
+    "li1": "Assurez-vous que vos noms de colonne sont uniques au sein d'un même tableau de données.",
+    "li2": "Exportez vos tableaux au format CSV en utilisant le séparateur \";\" (point-virgule)",
+    "li3": "Encodez vos fichiers CSV au format UTF-8 avec le logiciel gratuit sur Windows : Notepad++",
+    "li4": "Une fois les tableaux importés dans le logiciel, spécifiez le type de chaque colonne grâce au bouton d'édition dans la page \"tableaux\", vous avez deux choix :",
+    "li5": "Texte",
+    "li6": "Nombre",
+    "li7": "Ex: L'âge des mentors sera de type Nombre alors que la localisation de leur lieu de travail sera de type Texte.",
+    "nb1": "NB : Cette étape est cruciale pour le bon fonctionnement de l'algorithme.",
+    "title3": "Ecrire des contraintes",
+    "p4": "Les contraintes se construisent de la manière suivante : ",
+    "li8": "Il existe deux mots clés : \"mentee\" et \"mentor\"",
+    "li9": "Pour faire référence à une colonne présente dans le tableau mentee et dont le nom est par exemple \"Colonne 1\" on doit écrire \"mentee.COLONNE_1\". Le nom de la colonne est légèrement modifié pour le DSL : toutes les lettres sont en majuscule et les espaces sont remplacés par un underscore.",
+    "li10": "Vous pouvez ensuite utiliser des opérateurs de compraison pour écrire votre première contrainte : mentee.AGE < mentor.AGE",
+    "li11": "Vous pouvez également utiliser des opérateurs logiques et de calcul pour complexifier votre contrainte : mentee.AGE < mentor.AGE and mentee.JOB_LEVEL + 2 < mentor.JOB_LEVEL",
+    "li12": "Les opérateurs de comparaison sont : < , <= , > , >= , = , not ( i.e n'est pas égal à)",
+    "li13": "Les opérateurs de calcul sont : + , - , * , / ",
+    "li14": "Les opérateurs logiques sont : and , or",
+    "li15": "Vous pouvez utiliser des parenthèses pour les priorités.",
+    "title4": "Divers",
+    "p5": "Vous pouvez renommer et sauvegarder votre projet. Par convention un projet dont le nom est \"Mon projet de mentoring\" sera sauvegardé sous la forme \"mon_projet_de_mentoring.bmatch\", l'extension bmatch est spécifique à ce logiciel.",
+    "p6": "Pour sauvegarder votre projet courant assurez-vous de lui dédier un dossier sur votre ordinateur et sauvegardez régulièrement à cet emplacement."
   }
 }

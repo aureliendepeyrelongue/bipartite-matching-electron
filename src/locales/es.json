@@ -1,92 +1,128 @@
 {
-	"menuitems": {
-		"btables": {
-			"text": "Cuadros"
-		},
-		"constraints": {
-			"text": "Restricciones"
-		},
-		"matching": {
-			"text": "Pareo"
-		}
-	},
-	"menu": {
-		"files": "Archivos",
-		"newProject": "Nuevo proyecto",
-		"importProject": "Importar un proyecto",
-		"save": "Para registrarse",
-		"renameProject": "Cambiar el nombre del proyecto",
-		"window": "Ventana",
-		"quit": "Dejar",
-		"languages": "Idiomas",
-		"fr": "francés",
-		"en": "inglés",
-		"es": "Español",
-		"zh": "chino",
-		"ar": "árabe",
-		"ru": "ruso",
-		"du": "holandés",
-		"pt": "portugués",
-		"it": "italiano",
-		"de": "alemán"
-	},
-	"app": {
-		"renameProject": "Cambiar el nombre del proyecto",
-		"newProject": "Nuevo proyecto",
-		"projectName": "nombre del proyecto"
-	},
-	"common": {
-		"back": "Regresar",
-		"syntaxError": "Error de sintaxis",
-		"project": "Proyecto",
-		"name": "apellido",
-		"preview": "Visión general",
-		"description": "Descripción",
-		"actions": "Comportamiento",
-		"type": "Escribe",
-		"updatedAt": "Modificado",
-		"size": "Tamaño",
-		"column": "Columna",
-		"associatedVariable": "Variable asociada",
-		"lines": "líneas",
-		"mentees": "Aprendices",
-		"mentors": "Mentores",
-		"text": "Texto",
-		"number": "Número",
-		"content": "Contenido",
-		"save": "Para registrarse",
-		"cancel": "anular"
-	},
-	"tables": {
-		"title": "Administrar tablas",
-		"menteesTables": "Mesa de aprendices",
-		"mentorsTables": "Mesa de mentores",
-		"columns": "Columnas",
-		"edit": "Editar tipo de columna",
-		"noTablesMessage": "No se han importado tablas por el momento."
-	},
-	"constraints": {
-		"addConstraints": "Agregar una restricción",
-		"title": "Restricciones",
-		"noConstraintsMessage": "No existe ninguna restricción necesaria en el proyecto por el momento.",
-		"wrongSyntaxMessage": "La sintaxis de su restricción no es correcta, asegúrese de respetar la sintaxis recomendada.",
-		"necessaryConstraints": "Restricciones necesarias",
-		"secondaryConstraints": "Restricciones secundarias",
-		"weight": "Peso",
-		"constraintDetails": "Detalles de la restricción",
-		"descriptionPlaceholder": "Describe la restricción para facilitar su lectura (o relectura).",
-		"constraintType": "Tipo de restricción",
-		"constraintWeight": "Estrés peso",
-		"necessary": "Necesario",
-		"secondary": "Secundario"
-	},
-	"matching": {
-		"rejectedMentees": "Mentorados rechazados",
-		"rejectedMentors": "Mentores rechazados",
-		"start": "Empezar a emparejar",
-		"pairsFound": "Binomios encontrados",
-		"exportCSV": "Exportar en formato CSV",
-		"noMatchingMessage": "No se ha lanzado ninguna coincidencia para este proyecto por el momento.",
-		"title": "Pareo"
-	}
+  "menuitems": {
+    "btables": {
+      "text": "Cuadros"
+    },
+    "constraints": {
+      "text": "Restricciones"
+    },
+    "matching": {
+      "text": "Pareo"
+    },
+    "doc": {
+      "text": "Documentación"
+    },
+    "docpage": {
+      "text": "Aviso"
+    }
+  },
+  "menu": {
+    "files": "Archivos",
+    "newProject": "Nuevo proyecto",
+    "importProject": "Importar un proyecto",
+    "save": "Para registrarse",
+    "renameProject": "Cambiar el nombre del proyecto",
+    "window": "Ventana",
+    "quit": "Dejar",
+    "languages": "Idiomas",
+    "fr": "francés",
+    "en": "inglés",
+    "es": "Español",
+    "zh": "chino",
+    "ar": "árabe",
+    "ru": "ruso",
+    "du": "holandés",
+    "pt": "portugués",
+    "it": "italiano",
+    "de": "alemán"
+  },
+  "app": {
+    "renameProject": "Cambiar el nombre del proyecto",
+    "newProject": "Nuevo proyecto",
+    "projectName": "nombre del proyecto"
+  },
+  "common": {
+    "back": "Regresar",
+    "syntaxError": "Error de sintaxis",
+    "project": "Proyecto",
+    "name": "apellido",
+    "preview": "Visión general",
+    "description": "Descripción",
+    "actions": "Comportamiento",
+    "type": "Escribe",
+    "updatedAt": "Modificado",
+    "size": "Tamaño",
+    "column": "Columna",
+    "associatedVariable": "Variable asociada",
+    "lines": "líneas",
+    "mentees": "Aprendices",
+    "mentors": "Mentores",
+    "text": "Texto",
+    "number": "Número",
+    "content": "Contenido",
+    "save": "Para registrarse",
+    "cancel": "anular"
+  },
+  "tables": {
+    "title": "Administrar tablas",
+    "menteesTables": "Mesa de aprendices",
+    "mentorsTables": "Mesa de mentores",
+    "columns": "Columnas",
+    "edit": "Editar tipo de columna",
+    "noTablesMessage": "No se han importado tablas por el momento."
+  },
+  "constraints": {
+    "addConstraints": "Agregar una restricción",
+    "title": "Restricciones",
+    "noConstraintsMessage": "No existe ninguna restricción necesaria en el proyecto por el momento.",
+    "wrongSyntaxMessage": "La sintaxis de su restricción no es correcta, asegúrese de respetar la sintaxis recomendada.",
+    "necessaryConstraints": "Restricciones necesarias",
+    "secondaryConstraints": "Restricciones secundarias",
+    "weight": "Peso",
+    "constraintDetails": "Detalles de la restricción",
+    "descriptionPlaceholder": "Describe la restricción para facilitar su lectura (o relectura).",
+    "constraintType": "Tipo de restricción",
+    "constraintWeight": "Estrés peso",
+    "necessary": "Necesario",
+    "secondary": "Secundario"
+  },
+  "matching": {
+    "rejectedMentees": "Mentorados rechazados",
+    "rejectedMentors": "Mentores rechazados",
+    "start": "Empezar a emparejar",
+    "pairsFound": "Binomios encontrados",
+    "exportCSV": "Exportar en formato CSV",
+    "noMatchingMessage": "No se ha lanzado ninguna coincidencia para este proyecto por el momento.",
+    "title": "Pareo"
+  },
+  "doc": {
+    "documentation": "Documentación",
+    "title": "Instrucciones de uso",
+    "title1": "Operación de software",
+    "p1": "Este software permite hacer un emparejamiento bipartito sobre dos tablas de datos, el objetivo es poder obtener pares (cada miembro de los cuales proviene de una tabla diferente) y que respeten ciertas restricciones. El objetivo también es poder orientar fácilmente la coincidencia mediante un DSL (lenguaje específico de dominio). El DSL presente en este software permite escribir restricciones que deben cumplirse para que un par se considere viable.",
+    "p2": "Por lo tanto, el objetivo final de este software es permitir centrarse en la política de coincidencia y lanzar un algoritmo de coincidencia que respete esta política. Una vez lanzado, el emparejamiento se realiza en unos segundos, mientras que un emparejamiento manual llevaría varias horas.",
+    "title2": "Prepara los datos",
+    "p3": "Cada aprendiz y tabla de mentor debe importarse en formato CSV y con un separador de punto y coma. Cada tabla debe estar codificada en formato UTF-8. Si tiene problemas para codificar sus tablas de datos desde Excel, esto es lo que debe hacer.",
+    "li1": "Asegúrese de que los nombres de sus columnas sean únicos dentro de la misma tabla de datos.",
+    "li2": "Exporta tus tablas en formato CSV usando el separador \";\" (punto y coma)",
+    "li3": "Codifique sus archivos CSV en formato UTF-8 con el software gratuito en Windows: Notepad ++",
+    "li4": "Una vez que las tablas se han importado al software, especifique el tipo de cada columna usando el botón editar en la página \"tablas\", tiene dos opciones:",
+    "li5": "Texto",
+    "li6": "Número",
+    "li7": "Ej: La edad de los mentores será de tipo Número mientras que la ubicación de su lugar de trabajo será de tipo Texto.",
+    "nb1": "NB: Este paso es crucial para el correcto funcionamiento del algoritmo.",
+    "title3": "Escribir restricciones",
+    "p4": "Las restricciones se construyen de la siguiente manera:",
+    "li8": "Hay dos palabras clave: \"aprendiz\" y \"mentor\".",
+    "li9": "Para hacer referencia a una columna que se encuentra en la tabla de aprendices y cuyo nombre es, por ejemplo, \"Columna 1\", debe escribir \"mentee.COLONNE_1\". El nombre de la columna se cambia ligeramente para DSL: todas las letras están en mayúsculas y los espacios se reemplazan por un guión bajo.",
+    "li10": "Luego puede usar operadores de comparación para escribir su primera restricción: mentee.AGE <mentor.AGE",
+    "li11": "También puede usar operadores lógicos y computacionales para hacer su restricción más compleja: mentee.AGE <mentor.AGE y mentee.JOB_LEVEL + 2 <mentor.JOB_LEVEL",
+    "li12": "Los operadores de comparación son: <, <=,>,> =, =, not (es decir, no es igual a)",
+    "li13": "Los operadores de cálculo son: +, -, *, /",
+    "li14": "Los operadores lógicos son: y, o",
+    "li15": "Puede utilizar paréntesis para las prioridades.",
+    "title4": "Diverso",
+    "p5": "Puede cambiar el nombre y guardar su proyecto. Por convención, un proyecto cuyo nombre sea \"Mi proyecto de mentoría\" se guardará con el formato \"mon_projet_de_mentoring.bmatch\", la extensión bmatch es específica de este software.",
+    "p6": "Para guardar su proyecto actual, asegúrese de dedicarle una carpeta en su computadora y guárdelo regularmente en esta ubicación."
+  }
 }

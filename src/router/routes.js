@@ -10,25 +10,24 @@ export default [
   {
     path: "/apps/constraints",
     name: "constraints",
-    meta: {
-      authRequired: true,
-    },
+
     component: () => import("../views/pages/apps/constraints"),
   },
   {
     path: "/apps/tables",
     name: "tables",
-    meta: {
-      authRequired: true,
-    },
+
     component: () => import("../views/pages/apps/tables"),
   },
   {
     path: "/apps/matching",
     name: "matching",
-    meta: {
-      authRequired: true,
-    },
+
     component: () => import("../views/pages/apps/matching"),
+  },
+  {
+    path: "/doc/doc",
+    name: "doc",
+    component: () => import("../views/pages/doc/doc"),
   },
 ];

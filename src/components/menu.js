@@ -56,6 +56,17 @@ export const menuItems = [
     icon: "ri-restart-line",
     link: "/apps/matching",
   },
+  {
+    id: 23,
+    label: "menuitems.doc.text",
+    isTitle: true,
+  },
+  {
+    id: 73,
+    label: "menuitems.docpage.text",
+    icon: "ri-booklet-line",
+    link: "/doc/doc",
+  },
   /* {
     id: 6,
     label: "menuitems.apps.text",

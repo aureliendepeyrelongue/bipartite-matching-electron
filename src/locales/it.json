@@ -1,92 +1,128 @@
 {
-	"menuitems": {
-		"btables": {
-			"text": "Quadri"
-		},
-		"constraints": {
-			"text": "vincoli"
-		},
-		"matching": {
-			"text": "corrispondenza"
-		}
-	},
-	"menu": {
-		"files": "File",
-		"newProject": "Nuovo progetto",
-		"importProject": "Importa un progetto",
-		"save": "registrare",
-		"renameProject": "Rinominare il progetto",
-		"window": "Finestra",
-		"quit": "Lasciare",
-		"languages": "Le lingue",
-		"fr": "Francese",
-		"en": "inglese",
-		"es": "spagnolo",
-		"zh": "Cinese",
-		"ar": "arabo",
-		"ru": "russo",
-		"du": "olandese",
-		"pt": "portoghese",
-		"it": "italiano",
-		"de": "Tedesco"
-	},
-	"app": {
-		"renameProject": "Rinominare il progetto",
-		"newProject": "Nuovo progetto",
-		"projectName": "nome del progetto"
-	},
-	"common": {
-		"back": "Ritorno",
-		"syntaxError": "Errore di sintassi",
-		"project": "Progetto",
-		"name": "Nome",
-		"preview": "Panoramica",
-		"description": "Descrizione",
-		"actions": "Azioni",
-		"type": "Tipo",
-		"updatedAt": "Modificato",
-		"size": "Formato",
-		"column": "Colonna",
-		"associatedVariable": "Variabile associata",
-		"lines": "Linee",
-		"mentees": "Mentees",
-		"mentors": "Mentori",
-		"text": "Testo",
-		"number": "Numero",
-		"content": "Contenuti",
-		"save": "registrare",
-		"cancel": "per cancellare"
-	},
-	"tables": {
-		"title": "Gestisci tabelle",
-		"menteesTables": "Tabella Mentees",
-		"mentorsTables": "Tavolo Mentori",
-		"columns": "colonne",
-		"edit": "Modifica tipo di colonna",
-		"noTablesMessage": "Nessuna tabella è stata importata per il momento."
-	},
-	"constraints": {
-		"addConstraints": "Aggiungi un vincolo",
-		"title": "vincoli",
-		"noConstraintsMessage": "Nessun vincolo necessario è presente nel progetto per il momento.",
-		"wrongSyntaxMessage": "La sintassi del tuo vincolo non è corretta, assicurati di rispettare la sintassi consigliata.",
-		"necessaryConstraints": "Vincoli necessari",
-		"secondaryConstraints": "Vincoli secondari",
-		"weight": "Peso",
-		"constraintDetails": "Dettagli vincolo",
-		"descriptionPlaceholder": "Descrivere il vincolo per facilitarne la lettura (o la rilettura).",
-		"constraintType": "Tipo di vincolo",
-		"constraintWeight": "Peso dello stress",
-		"necessary": "Necessario",
-		"secondary": "Secondario"
-	},
-	"matching": {
-		"rejectedMentees": "Allievi rifiutati",
-		"rejectedMentors": "Mentori rifiutati",
-		"start": "Inizia ad abbinare",
-		"pairsFound": "Binomi trovati",
-		"exportCSV": "Esporta in formato CSV",
-		"noMatchingMessage": "Per il momento non è stata avviata alcuna corrispondenza per questo progetto.",
-		"title": "corrispondenza"
-	}
+  "menuitems": {
+    "btables": {
+      "text": "Quadri"
+    },
+    "constraints": {
+      "text": "vincoli"
+    },
+    "matching": {
+      "text": "corrispondenza"
+    },
+    "doc": {
+      "text": "Documentazione"
+    },
+    "docpage": {
+      "text": "Avviso"
+    }
+  },
+  "menu": {
+    "files": "File",
+    "newProject": "Nuovo progetto",
+    "importProject": "Importa un progetto",
+    "save": "registrare",
+    "renameProject": "Rinominare il progetto",
+    "window": "Finestra",
+    "quit": "Lasciare",
+    "languages": "Le lingue",
+    "fr": "Francese",
+    "en": "inglese",
+    "es": "spagnolo",
+    "zh": "Cinese",
+    "ar": "arabo",
+    "ru": "russo",
+    "du": "olandese",
+    "pt": "portoghese",
+    "it": "italiano",
+    "de": "Tedesco"
+  },
+  "app": {
+    "renameProject": "Rinominare il progetto",
+    "newProject": "Nuovo progetto",
+    "projectName": "nome del progetto"
+  },
+  "common": {
+    "back": "Ritorno",
+    "syntaxError": "Errore di sintassi",
+    "project": "Progetto",
+    "name": "Nome",
+    "preview": "Panoramica",
+    "description": "Descrizione",
+    "actions": "Azioni",
+    "type": "Tipo",
+    "updatedAt": "Modificato",
+    "size": "Formato",
+    "column": "Colonna",
+    "associatedVariable": "Variabile associata",
+    "lines": "Linee",
+    "mentees": "Mentees",
+    "mentors": "Mentori",
+    "text": "Testo",
+    "number": "Numero",
+    "content": "Contenuti",
+    "save": "registrare",
+    "cancel": "per cancellare"
+  },
+  "tables": {
+    "title": "Gestisci tabelle",
+    "menteesTables": "Tabella Mentees",
+    "mentorsTables": "Tavolo Mentori",
+    "columns": "colonne",
+    "edit": "Modifica tipo di colonna",
+    "noTablesMessage": "Nessuna tabella è stata importata per il momento."
+  },
+  "constraints": {
+    "addConstraints": "Aggiungi un vincolo",
+    "title": "vincoli",
+    "noConstraintsMessage": "Nessun vincolo necessario è presente nel progetto per il momento.",
+    "wrongSyntaxMessage": "La sintassi del tuo vincolo non è corretta, assicurati di rispettare la sintassi consigliata.",
+    "necessaryConstraints": "Vincoli necessari",
+    "secondaryConstraints": "Vincoli secondari",
+    "weight": "Peso",
+    "constraintDetails": "Dettagli vincolo",
+    "descriptionPlaceholder": "Descrivere il vincolo per facilitarne la lettura (o la rilettura).",
+    "constraintType": "Tipo di vincolo",
+    "constraintWeight": "Peso dello stress",
+    "necessary": "Necessario",
+    "secondary": "Secondario"
+  },
+  "matching": {
+    "rejectedMentees": "Allievi rifiutati",
+    "rejectedMentors": "Mentori rifiutati",
+    "start": "Inizia ad abbinare",
+    "pairsFound": "Binomi trovati",
+    "exportCSV": "Esporta in formato CSV",
+    "noMatchingMessage": "Per il momento non è stata avviata alcuna corrispondenza per questo progetto.",
+    "title": "corrispondenza"
+  },
+  "doc": {
+    "documentation": "Documentazione",
+    "title": "Istruzioni per l'uso",
+    "title1": "Funzionamento del software",
+    "p1": "Questo software permette di fare match bipartiti su due tabelle di dati, l'obiettivo è riuscire ad ottenere coppie (ogni membro delle quali proviene da una tabella diversa) e che rispettino determinati vincoli. L'obiettivo è anche quello di poter orientare facilmente il matching utilizzando un DSL (Domain Specific Language). La DSL presente in questo software permette di scrivere dei vincoli che devono essere soddisfatti affinché una coppia possa essere considerata valida.",
+    "p2": "Quindi l'obiettivo finale di questo software è quello di consentire di concentrarsi sulla politica di corrispondenza e di lanciare un algoritmo di corrispondenza che rispetti questa politica. Una volta avviato, l'abbinamento viene eseguito in pochi secondi, mentre un abbinamento manuale richiederebbe diverse ore.",
+    "title2": "Prepara i dati",
+    "p3": "Ogni tabella di allievo e mentore deve essere importata in formato CSV e con un punto e virgola separatore. Ogni tabella deve essere codificata in formato UTF-8. Se hai problemi a codificare le tue tabelle di dati da Excel, ecco cosa fare.",
+    "li1": "Assicurati che i nomi delle colonne siano univoci all'interno della stessa tabella di dati.",
+    "li2": "Esporta le tue tabelle in formato CSV utilizzando il separatore \";\" (punto e virgola)",
+    "li3": "Codifica i tuoi file CSV in formato UTF-8 con il software gratuito su Windows: Blocco note ++",
+    "li4": "Una volta importate le tabelle nel software, specifica il tipo di ogni colonna tramite il pulsante di modifica nella pagina \"tabelle\", hai due scelte:",
+    "li5": "Testo",
+    "li6": "Numero",
+    "li7": "Es: L'età dei mentori sarà di tipo Numero mentre la posizione del loro posto di lavoro sarà di tipo Testo.",
+    "nb1": "NB: Questo passaggio è fondamentale per il corretto funzionamento dell'algoritmo.",
+    "title3": "Scrivi vincoli",
+    "p4": "I vincoli sono costruiti come segue:",
+    "li8": "Ci sono due parole chiave: \"mentee\" e \"mentor\"",
+    "li9": "Per fare riferimento a una colonna che si trova nella tabella dell'allievo e il cui nome è ad esempio \"Colonna 1\", è necessario scrivere \"allievo.COLONNE_1\". Il nome della colonna è leggermente cambiato per DSL: tutte le lettere sono maiuscole e gli spazi sono sostituiti da un carattere di sottolineatura.",
+    "li10": "Puoi quindi utilizzare gli operatori di confronto per scrivere il tuo primo vincolo: mentee.AGE <mentor.AGE",
+    "li11": "Puoi anche utilizzare operatori logici e computazionali per rendere più complesso il tuo vincolo: mentee.AGE <mentor.AGE e mentee.JOB_LEVEL + 2 <mentor.JOB_LEVEL",
+    "li12": "Gli operatori di confronto sono: <, <=,>,> =, =, not (cioè non è uguale a)",
+    "li13": "Gli operatori di calcolo sono: +, -, *, /",
+    "li14": "Gli operatori logici sono: e, o",
+    "li15": "Puoi usare le parentesi per le priorità.",
+    "title4": "Varie",
+    "p5": "Puoi rinominare e salvare il tuo progetto. Per convenzione, un progetto il cui nome è \"My mentoring project\" verrà salvato nella forma \"mon_projet_de_mentoring.bmatch\", l'estensione bmatch è specifica per questo software.",
+    "p6": "Per salvare il tuo progetto corrente assicurati di dedicargli una cartella sul tuo computer e salva regolarmente in questa posizione."
+  }
 }

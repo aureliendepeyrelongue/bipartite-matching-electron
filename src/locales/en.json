@@ -8,6 +8,12 @@
     },
     "matching": {
       "text": "Matching"
+    },
+    "doc": {
+      "text": "Documentation"
+    },
+    "docpage": {
+      "text": "Notice"
     }
   },
   "menu": {
@@ -88,5 +94,35 @@
     "exportCSV": "Export in CSV format",
     "noMatchingMessage": "No matching has been launched for this project for the moment.",
     "title": "Matching"
+  },
+  "doc": {
+    "documentation": "Documentation",
+    "title": "Instructions for use",
+    "title1": "Software operation",
+    "p1": "This software allows you to do bipartite matching on two data tables, the objective is to be able to obtain pairs (each member of which comes from a different table) and which respect certain constraints. The goal is also to be able to easily orient the matching using a DSL (Domain Specific Language). The DSL present in this software makes it possible to write constraints that must be satisfied for a pair to be considered viable.",
+    "p2": "Thus the ultimate goal of this software is to allow focusing on the matching policy and to launch a matching algorithm which will respect this policy. Once launched, the matching is done in a few seconds where a manual matching would take several hours.",
+    "title2": "Prepare the data",
+    "p3": "Each mentee and mentor table must be imported in CSV format and with a semicolon separator. Each table must be encoded in UTF-8 format. If you're having trouble encoding your data tables from Excel, here's what to do.",
+    "li1": "Make sure your column names are unique within the same data table.",
+    "li2": "Export your tables in CSV format using the separator \";\" (semicolon)",
+    "li3": "Encode your CSV files in UTF-8 format with the free software on Windows: Notepad ++",
+    "li4": "Once the tables have been imported into the software, specify the type of each column using the edit button in the \"tables\" page, you have two choices:",
+    "li5": "Text",
+    "li6": "Number",
+    "li7": "Ex: The age of mentors will be of type Number while the location of their workplace will be of type Text.",
+    "nb1": "NB: This step is crucial for the proper functioning of the algorithm.",
+    "title3": "Write constraints",
+    "p4": "The constraints are constructed as follows:",
+    "li8": "There are two key words: \"mentee\" and \"mentor\"",
+    "li9": "To refer to a column found in the mentee table and whose name is for example \"Column 1\", you must write \"mentee.COLONNE_1\". The column name is slightly changed for DSL: all letters are uppercase and spaces are replaced by an underscore.",
+    "li10": "You can then use comparison operators to write your first constraint: mentee.AGE <mentor.AGE",
+    "li11": "You can also use logical and computational operators to make your constraint more complex: mentee.AGE <mentor.AGE and mentee.JOB_LEVEL + 2 <mentor.JOB_LEVEL",
+    "li12": "The comparison operators are: <, <=,>,> =, =, not (ie is not equal to)",
+    "li13": "The calculation operators are: +, -, *, /",
+    "li14": "The logical operators are: and, or",
+    "li15": "You can use parentheses for priorities.",
+    "title4": "Various",
+    "p5": "You can rename and save your project. By convention, a project whose name is \"My mentoring project\" will be saved in the form \"mon_projet_de_mentoring.bmatch\", the bmatch extension is specific to this software.",
+    "p6": "To save your current project make sure to dedicate a folder to it on your computer and save regularly to this location."
   }
 }

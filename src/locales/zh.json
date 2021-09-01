@@ -1,92 +1,128 @@
 {
-	"menuitems": {
-		"btables": {
-			"text": "绘画"
-		},
-		"constraints": {
-			"text": "约束"
-		},
-		"matching": {
-			"text": "匹配"
-		}
-	},
-	"menu": {
-		"files": "文件",
-		"newProject": "新项目",
-		"importProject": "导入项目",
-		"save": "注册",
-		"renameProject": "重命名项目",
-		"window": "窗户",
-		"quit": "离开",
-		"languages": "语言",
-		"fr": "法语",
-		"en": "英语",
-		"es": "西班牙语",
-		"zh": "中国人",
-		"ar": "阿拉伯",
-		"ru": "俄语",
-		"du": "荷兰语",
-		"pt": "葡萄牙语",
-		"it": "意大利语",
-		"de": "德语"
-	},
-	"app": {
-		"renameProject": "重命名项目",
-		"newProject": "新项目",
-		"projectName": "项目名称"
-	},
-	"common": {
-		"back": "返回",
-		"syntaxError": "语法错误",
-		"project": "项目",
-		"name": "姓",
-		"preview": "概述",
-		"description": "描述",
-		"actions": "行动",
-		"type": "类型",
-		"updatedAt": "修改的",
-		"size": "切",
-		"column": "柱子",
-		"associatedVariable": "相关变量",
-		"lines": "线",
-		"mentees": "学员",
-		"mentors": "导师",
-		"text": "文本",
-		"number": "数字",
-		"content": "内容",
-		"save": "注册",
-		"cancel": "取消"
-	},
-	"tables": {
-		"title": "管理表",
-		"menteesTables": "学员表",
-		"mentorsTables": "导师表",
-		"columns": "列",
-		"edit": "编辑列类型",
-		"noTablesMessage": "目前尚未导入任何表。"
-	},
-	"constraints": {
-		"addConstraints": "添加约束",
-		"title": "约束",
-		"noConstraintsMessage": "目前项目中没有必要的约束。",
-		"wrongSyntaxMessage": "您的约束的语法不正确，请确保遵守推荐的语法。",
-		"necessaryConstraints": "必要的约束",
-		"secondaryConstraints": "次要约束",
-		"weight": "重量",
-		"constraintDetails": "约束细节",
-		"descriptionPlaceholder": "描述约束以促进其阅读（或重读）。",
-		"constraintType": "约束类型",
-		"constraintWeight": "应力重量",
-		"necessary": "必要的",
-		"secondary": "中学"
-	},
-	"matching": {
-		"rejectedMentees": "被拒绝的学员",
-		"rejectedMentors": "导师被拒绝",
-		"start": "开始匹配",
-		"pairsFound": "发现二项式",
-		"exportCSV": "以 CSV 格式导出",
-		"noMatchingMessage": "暂时没有为这个项目启动匹配。",
-		"title": "匹配"
-	}
+  "menuitems": {
+    "btables": {
+      "text": "绘画"
+    },
+    "constraints": {
+      "text": "约束"
+    },
+    "matching": {
+      "text": "匹配"
+    },
+    "doc": {
+      "text": "文档"
+    },
+    "docpage": {
+      "text": "注意"
+    }
+  },
+  "menu": {
+    "files": "文件",
+    "newProject": "新项目",
+    "importProject": "导入项目",
+    "save": "注册",
+    "renameProject": "重命名项目",
+    "window": "窗户",
+    "quit": "离开",
+    "languages": "语言",
+    "fr": "法语",
+    "en": "英语",
+    "es": "西班牙语",
+    "zh": "中国人",
+    "ar": "阿拉伯",
+    "ru": "俄语",
+    "du": "荷兰语",
+    "pt": "葡萄牙语",
+    "it": "意大利语",
+    "de": "德语"
+  },
+  "app": {
+    "renameProject": "重命名项目",
+    "newProject": "新项目",
+    "projectName": "项目名称"
+  },
+  "common": {
+    "back": "返回",
+    "syntaxError": "语法错误",
+    "project": "项目",
+    "name": "姓",
+    "preview": "概述",
+    "description": "描述",
+    "actions": "行动",
+    "type": "类型",
+    "updatedAt": "修改的",
+    "size": "切",
+    "column": "柱子",
+    "associatedVariable": "相关变量",
+    "lines": "线",
+    "mentees": "学员",
+    "mentors": "导师",
+    "text": "文本",
+    "number": "数字",
+    "content": "内容",
+    "save": "注册",
+    "cancel": "取消"
+  },
+  "tables": {
+    "title": "管理表",
+    "menteesTables": "学员表",
+    "mentorsTables": "导师表",
+    "columns": "列",
+    "edit": "编辑列类型",
+    "noTablesMessage": "目前尚未导入任何表。"
+  },
+  "constraints": {
+    "addConstraints": "添加约束",
+    "title": "约束",
+    "noConstraintsMessage": "目前项目中没有必要的约束。",
+    "wrongSyntaxMessage": "您的约束的语法不正确，请确保遵守推荐的语法。",
+    "necessaryConstraints": "必要的约束",
+    "secondaryConstraints": "次要约束",
+    "weight": "重量",
+    "constraintDetails": "约束细节",
+    "descriptionPlaceholder": "描述约束以促进其阅读（或重读）。",
+    "constraintType": "约束类型",
+    "constraintWeight": "应力重量",
+    "necessary": "必要的",
+    "secondary": "中学"
+  },
+  "matching": {
+    "rejectedMentees": "被拒绝的学员",
+    "rejectedMentors": "导师被拒绝",
+    "start": "开始匹配",
+    "pairsFound": "发现二项式",
+    "exportCSV": "以 CSV 格式导出",
+    "noMatchingMessage": "暂时没有为这个项目启动匹配。",
+    "title": "匹配"
+  },
+  "doc": {
+    "documentation": "文档",
+    "title": "使用说明",
+    "title1": "软件操作",
+    "p1": "该软件可以对两个数据表进行二分匹配，目标是能够获得对（其中每个成员来自不同的表）并遵守某些约束。目标还在于能够使用 DSL（领域特定语言）轻松定位匹配。该软件中存在的 DSL 可以编写必须满足的约束才能被认为是可行的。",
+    "p2": "因此，该软件的最终目标是允许关注匹配策略并启动将尊重该策略的匹配算法。一旦启动，匹配会在几秒钟内完成，而手动匹配需要几个小时。",
+    "title2": "准备数据",
+    "p3": "每个受指导者和指导者表必须以 CSV 格式导入并使用分号分隔符。每个表都必须以 UTF-8 格式编码。如果您在从 Excel 编码数据表时遇到问题，请执行以下操作。",
+    "li1": "确保您的列名在同一个数据表中是唯一的。",
+    "li2": "使用分隔符“;”以 CSV 格式导出表格（分号）",
+    "li3": "使用 Windows 上的免费软件将 CSV 文件编码为 UTF-8 格式：Notepad ++",
+    "li4": "将表格导入软件后，使用“表格”页面中的编辑按钮指定每列的类型，您有两种选择：",
+    "li5": "文本",
+    "li6": "数字",
+    "li7": "例如：导师的年龄为 Number 类型，而他们的工作地点为 Text 类型。",
+    "nb1": "注意：这一步对于算法的正常运行至关重要。",
+    "title3": "写约束",
+    "p4": "约束构造如下：",
+    "li8": "有两个关键词：“学员”和“导师”",
+    "li9": "要引用在受指导者表中找到的列并且其名称例如为“列 1”，您必须编写“mentee.COLONNE_1”。 DSL 的列名略有更改：所有字母均为大写，空格替换为下划线。",
+    "li10": "然后您可以使用比较运算符来编写您的第一个约束：mentee.AGE <mentor.AGE",
+    "li11": "您还可以使用逻辑和计算运算符使您的约束更加复杂：mentee.AGE <mentor.AGE 和 mentee.JOB_LEVEL + 2 <mentor.JOB_LEVEL",
+    "li12": "比较运算符有：<、<=、>、> =、=、not（即不等于）",
+    "li13": "计算运算符为：+、-、*、/",
+    "li14": "逻辑运算符是：和，或",
+    "li15": "您可以使用括号表示优先级。",
+    "title4": "各种各样的",
+    "p5": "您可以重命名和保存您的项目。按照惯例，名称为“我的指导项目”的项目将以“mon_projet_de_mentoring.bmatch”的形式保存，bmatch 扩展名是此软件特有的。",
+    "p6": "要保存您当前的项目，请确保在您的计算机上为它指定一个文件夹，并定期保存到此位置。"
+  }
 }

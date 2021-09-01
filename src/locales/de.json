@@ -1,92 +1,128 @@
 {
-	"menuitems": {
-		"btables": {
-			"text": "Gemälde"
-		},
-		"constraints": {
-			"text": "Einschränkungen"
-		},
-		"matching": {
-			"text": "Passende"
-		}
-	},
-	"menu": {
-		"files": "Dateien",
-		"newProject": "Neues Projekt",
-		"importProject": "Importieren eines Projekts",
-		"save": "Registrieren",
-		"renameProject": "Benennen Sie das Projekt um",
-		"window": "Fenster",
-		"quit": "Verlassen",
-		"languages": "Sprachen",
-		"fr": "Französisch",
-		"en": "Englisch",
-		"es": "Spanisch",
-		"zh": "Chinesisch",
-		"ar": "Arabisch",
-		"ru": "Russisch",
-		"du": "Niederländisch",
-		"pt": "Portugiesisch",
-		"it": "Italienisch",
-		"de": "Deutsche"
-	},
-	"app": {
-		"renameProject": "Benennen Sie das Projekt um",
-		"newProject": "Neues Projekt",
-		"projectName": "Name des Projekts"
-	},
-	"common": {
-		"back": "Zurückkehren",
-		"syntaxError": "Syntax-Fehler",
-		"project": "Projekt",
-		"name": "Familienname, Nachname",
-		"preview": "Überblick",
-		"description": "Beschreibung",
-		"actions": "Aktionen",
-		"type": "Typ",
-		"updatedAt": "Geändert",
-		"size": "Schneiden",
-		"column": "Spalte",
-		"associatedVariable": "Zugehörige Variable",
-		"lines": "Linien",
-		"mentees": "Mentees",
-		"mentors": "Mentoren",
-		"text": "Text",
-		"number": "Nummer",
-		"content": "Inhalt",
-		"save": "Registrieren",
-		"cancel": "abbrechen"
-	},
-	"tables": {
-		"title": "Tabellen verwalten",
-		"menteesTables": "Mentees-Tisch",
-		"mentorsTables": "Mentorentisch",
-		"columns": "Säulen",
-		"edit": "Spaltentyp bearbeiten",
-		"noTablesMessage": "Zur Zeit wurden keine Tabellen importiert."
-	},
-	"constraints": {
-		"addConstraints": "Einschränkung hinzufügen",
-		"title": "Einschränkungen",
-		"noConstraintsMessage": "Im Moment ist im Projekt keine notwendige Einschränkung vorhanden.",
-		"wrongSyntaxMessage": "Die Syntax Ihrer Einschränkung ist nicht korrekt. Beachten Sie die empfohlene Syntax.",
-		"necessaryConstraints": "Notwendige Einschränkungen",
-		"secondaryConstraints": "Sekundäre Einschränkungen",
-		"weight": "Gewicht",
-		"constraintDetails": "Einschränkungsdetails",
-		"descriptionPlaceholder": "Beschreiben Sie die Einschränkung, um ihr Lesen (oder erneutes Lesen) zu erleichtern.",
-		"constraintType": "Art der Einschränkung",
-		"constraintWeight": "Stressgewicht",
-		"necessary": "Notwendig",
-		"secondary": "Sekundär"
-	},
-	"matching": {
-		"rejectedMentees": "Abgelehnte Mentees",
-		"rejectedMentors": "Mentoren abgelehnt",
-		"start": "Abgleich starten",
-		"pairsFound": "Binomiale gefunden",
-		"exportCSV": "Export im CSV-Format",
-		"noMatchingMessage": "Für dieses Projekt wurde im Moment kein Matching gestartet.",
-		"title": "Passende"
-	}
+  "menuitems": {
+    "btables": {
+      "text": "Gemälde"
+    },
+    "constraints": {
+      "text": "Einschränkungen"
+    },
+    "matching": {
+      "text": "Passende"
+    },
+    "doc": {
+      "text": "Dokumentation"
+    },
+    "docpage": {
+      "text": "Notiz"
+    }
+  },
+  "menu": {
+    "files": "Dateien",
+    "newProject": "Neues Projekt",
+    "importProject": "Importieren eines Projekts",
+    "save": "Registrieren",
+    "renameProject": "Benennen Sie das Projekt um",
+    "window": "Fenster",
+    "quit": "Verlassen",
+    "languages": "Sprachen",
+    "fr": "Französisch",
+    "en": "Englisch",
+    "es": "Spanisch",
+    "zh": "Chinesisch",
+    "ar": "Arabisch",
+    "ru": "Russisch",
+    "du": "Niederländisch",
+    "pt": "Portugiesisch",
+    "it": "Italienisch",
+    "de": "Deutsche"
+  },
+  "app": {
+    "renameProject": "Benennen Sie das Projekt um",
+    "newProject": "Neues Projekt",
+    "projectName": "Name des Projekts"
+  },
+  "common": {
+    "back": "Zurückkehren",
+    "syntaxError": "Syntax-Fehler",
+    "project": "Projekt",
+    "name": "Familienname, Nachname",
+    "preview": "Überblick",
+    "description": "Beschreibung",
+    "actions": "Aktionen",
+    "type": "Typ",
+    "updatedAt": "Geändert",
+    "size": "Schneiden",
+    "column": "Spalte",
+    "associatedVariable": "Zugehörige Variable",
+    "lines": "Linien",
+    "mentees": "Mentees",
+    "mentors": "Mentoren",
+    "text": "Text",
+    "number": "Nummer",
+    "content": "Inhalt",
+    "save": "Registrieren",
+    "cancel": "abbrechen"
+  },
+  "tables": {
+    "title": "Tabellen verwalten",
+    "menteesTables": "Mentees-Tisch",
+    "mentorsTables": "Mentorentisch",
+    "columns": "Säulen",
+    "edit": "Spaltentyp bearbeiten",
+    "noTablesMessage": "Zur Zeit wurden keine Tabellen importiert."
+  },
+  "constraints": {
+    "addConstraints": "Einschränkung hinzufügen",
+    "title": "Einschränkungen",
+    "noConstraintsMessage": "Im Moment ist im Projekt keine notwendige Einschränkung vorhanden.",
+    "wrongSyntaxMessage": "Die Syntax Ihrer Einschränkung ist nicht korrekt. Beachten Sie die empfohlene Syntax.",
+    "necessaryConstraints": "Notwendige Einschränkungen",
+    "secondaryConstraints": "Sekundäre Einschränkungen",
+    "weight": "Gewicht",
+    "constraintDetails": "Einschränkungsdetails",
+    "descriptionPlaceholder": "Beschreiben Sie die Einschränkung, um ihr Lesen (oder erneutes Lesen) zu erleichtern.",
+    "constraintType": "Art der Einschränkung",
+    "constraintWeight": "Stressgewicht",
+    "necessary": "Notwendig",
+    "secondary": "Sekundär"
+  },
+  "matching": {
+    "rejectedMentees": "Abgelehnte Mentees",
+    "rejectedMentors": "Mentoren abgelehnt",
+    "start": "Abgleich starten",
+    "pairsFound": "Binomiale gefunden",
+    "exportCSV": "Export im CSV-Format",
+    "noMatchingMessage": "Für dieses Projekt wurde im Moment kein Matching gestartet.",
+    "title": "Passende"
+  },
+  "doc": {
+    "documentation": "Dokumentation",
+    "title": "Gebrauchsanweisung",
+    "title1": "Softwarebetrieb",
+    "p1": "Diese Software ermöglicht den bipartiten Abgleich von zwei Datentabellen. Das Ziel besteht darin, Paare (von denen jedes Mitglied aus einer anderen Tabelle stammt) zu erhalten, die bestimmte Einschränkungen beachten. Ziel ist es auch, das Matching einfach über eine DSL (Domain Specific Language) orientieren zu können. Die in dieser Software vorhandene DSL ermöglicht es, Einschränkungen zu schreiben, die erfüllt sein müssen, damit ein Paar als tragfähig angesehen wird.",
+    "p2": "Somit besteht das ultimative Ziel dieser Software darin, die Konzentration auf die Abgleichsrichtlinie zu ermöglichen und einen Abgleichsalgorithmus zu starten, der diese Richtlinie respektiert. Nach dem Start ist der Abgleich in wenigen Sekunden erledigt, während ein manueller Abgleich mehrere Stunden dauern würde.",
+    "title2": "Bereiten Sie die Daten vor",
+    "p3": "Jede Mentee- und Mentorentabelle muss im CSV-Format und mit Semikolon als Trennzeichen importiert werden. Jede Tabelle muss im UTF-8-Format kodiert sein. Wenn Sie Probleme beim Codieren Ihrer Datentabellen aus Excel haben, gehen Sie wie folgt vor.",
+    "li1": "Stellen Sie sicher, dass Ihre Spaltennamen innerhalb derselben Datentabelle eindeutig sind.",
+    "li2": "Exportieren Sie Ihre Tabellen im CSV-Format mit dem Trennzeichen \";\" (Semikolon)",
+    "li3": "Codieren Sie Ihre CSV-Dateien im UTF-8-Format mit der kostenlosen Software unter Windows: Notepad ++",
+    "li4": "Nachdem die Tabellen in die Software importiert wurden, geben Sie den Typ jeder Spalte über die Schaltfläche Bearbeiten auf der Seite \"Tabellen\" an. Sie haben zwei Möglichkeiten:",
+    "li5": "Text",
+    "li6": "Nummer",
+    "li7": "Beispiel: Das Alter der Mentoren ist vom Typ Zahl, während der Standort ihres Arbeitsplatzes vom Typ Text ist.",
+    "nb1": "Hinweis: Dieser Schritt ist entscheidend für das ordnungsgemäße Funktionieren des Algorithmus.",
+    "title3": "Schreibbeschränkungen",
+    "p4": "Die Einschränkungen sind wie folgt aufgebaut:",
+    "li8": "Es gibt zwei Schlüsselwörter: „Mentee“ und „Mentor“",
+    "li9": "Um auf eine Spalte in der Mentee-Tabelle zu verweisen, deren Name beispielsweise \"Spalte 1\" lautet, müssen Sie \"mentee.COLONNE_1\" schreiben. Für DSL wurde der Spaltenname leicht geändert: Alle Buchstaben sind Großbuchstaben und Leerzeichen werden durch einen Unterstrich ersetzt.",
+    "li10": "Sie können dann Vergleichsoperatoren verwenden, um Ihre erste Einschränkung zu schreiben: mentee.AGE <mentor.AGE",
+    "li11": "Sie können auch logische und rechnerische Operatoren verwenden, um Ihre Einschränkung komplexer zu gestalten: mentee.AGE <mentor.AGE und mentee.JOB_LEVEL + 2 <mentor.JOB_LEVEL",
+    "li12": "Die Vergleichsoperatoren sind: <, <=,>,> =, =, not (dh ist ungleich)",
+    "li13": "Die Berechnungsoperatoren sind: +, -, *, /",
+    "li14": "Die logischen Operatoren sind: und, oder",
+    "li15": "Sie können Klammern für Prioritäten verwenden.",
+    "title4": "Verschieden",
+    "p5": "Sie können Ihr Projekt umbenennen und speichern. Konventionell wird ein Projekt mit dem Namen \"Mein Mentoring-Projekt\" in der Form \"mon_projet_de_mentoring.bmatch\" gespeichert, die bmatch-Erweiterung ist spezifisch für diese Software.",
+    "p6": "Um Ihr aktuelles Projekt zu speichern, stellen Sie sicher, dass Sie ihm einen Ordner auf Ihrem Computer zuweisen und regelmäßig an diesem Ort speichern."
+  }
 }
