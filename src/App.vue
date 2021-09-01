@@ -79,7 +79,7 @@ export default {
         fr: this.$t("menu.fr"),
         en: this.$t("menu.en"),
         es: this.$t("menu.es"),
-        zh: this.$t("menu.es"),
+        zh: this.$t("menu.zh"),
         ar: this.$t("menu.ar"),
         ru: this.$t("menu.ru"),
         du: this.$t("menu.du"),
